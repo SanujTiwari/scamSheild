@@ -1,6 +1,147 @@
+/**
+ * ScamShield AI Service V2
+ * Gemini AI integration for both during-detection analysis and post-hoc explanation
+ *
+ * Functions:
+ * - analyzeWithAI(): Deep text analysis during detection (returns structured JSON)
+ * - generateExplanation(): Post-hoc explanation of results (returns text)
+ * - chatResponse(): Interactive chat assistant (returns text)
+ */
+
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+// ═══════════════════════════════════════════════
+// AI Deep Analysis (During Detection)
+// ═══════════════════════════════════════════════
+
+/**
+ * Analyze text content with Gemini AI during the detection phase.
+ * Returns structured indicators that are merged with rule-based analysis.
+ *
+ * @param {string} text - The text to analyze
+ * @param {string} scanType - "job" | "message" | "payment" | "recruiter" | "url"
+ * @returns {Object} Structured analysis with indicators and risk assessment
+ */
+const analyzeWithAI = async (text, scanType) => {
+  if (!process.env.GEMINI_API_KEY) {
+    return { available: false, reason: "Gemini API key not configured" };
+  }
+
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    const typePrompts = {
+      job: `Analyze this job posting/description for scam indicators. Look for:
+- Unrealistic salary claims (compare to industry norms)
+- Vague or missing company details
+- Requests for money before employment
+- Requests for sensitive personal data (OTP, bank details, passwords)
+- Artificial urgency or pressure
+- MLM/pyramid scheme language
+- Poor grammar/formatting suggesting non-professional origin
+- Claims that seem too good to be true
+- Missing job requirements for senior roles
+- Suspicious contact methods`,
+
+      message: `Analyze this message for scam/phishing indicators. Look for:
+- Social engineering tactics (authority, fear, greed, urgency)
+- Phishing attempts (fake login, verify account)
+- Payment or money transfer requests
+- Requests for OTP, passwords, or personal information
+- Fake rewards, prizes, or lottery claims
+- Impersonation of known brands or organizations
+- Suspicious links
+- Emotional manipulation
+- Too-good-to-be-true offers`,
+
+      payment: `Analyze this payment request for fraud indicators. Look for:
+- Advance fee fraud patterns
+- Non-standard payment methods (crypto, gift cards)
+- Pressure to pay immediately
+- Fake refund promises
+- Requests to personal accounts rather than company accounts
+- Suspicious justifications for the payment
+- MLM or pyramid scheme patterns`,
+
+      recruiter: `Analyze this recruiter information for legitimacy. Look for:
+- Use of free email services for professional communication
+- Mismatch between claimed company and email domain
+- Missing verifiable professional presence
+- Suspicious communication patterns
+- Unverified claims of authority`,
+
+      url: `Analyze this URL for phishing/malware indicators. Look for:
+- Brand impersonation in the domain name
+- Typosquatting patterns
+- Suspicious domain structure
+- Indicators of credential harvesting
+- Known phishing patterns in URL structure`,
+    };
+
+    const prompt = `You are a cybersecurity fraud analyst. ${typePrompts[scanType] || typePrompts.message}
+
+INPUT TEXT:
+"""
+${text.substring(0, 3000)}
+"""
+
+Respond ONLY with valid JSON in this exact format (no markdown, no code blocks, no explanation outside JSON):
+{
+  "riskAssessment": "SAFE" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL",
+  "riskScore": <number 0-100>,
+  "indicators": [
+    {
+      "category": "<risk category>",
+      "finding": "<specific finding description>",
+      "severity": "Low" | "Medium" | "High" | "Critical"
+    }
+  ],
+  "summary": "<1-2 sentence analysis summary>"
+}
+
+RULES:
+- riskScore must reflect the actual analysis — do not default to a middle value
+- Only include indicators you genuinely detect in the text
+- If the text appears legitimate, return a low score with few or no indicators
+- Be specific in findings — reference actual text content when possible
+- Category should be one of: "Payment Risk", "Content Risk", "Behavior Risk", "Communication Risk", "URL Risk", "Identity Risk", "Data Theft Risk", "Social Engineering", "Company Risk"`;
+
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    let responseText = response.text().trim();
+
+    // Strip markdown code blocks if present
+    responseText = responseText.replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "").trim();
+
+    const parsed = JSON.parse(responseText);
+
+    // Validate response structure
+    if (!parsed.riskAssessment || typeof parsed.riskScore !== "number" || !Array.isArray(parsed.indicators)) {
+      console.error("AI response missing required fields:", parsed);
+      return { available: false, reason: "Invalid AI response structure" };
+    }
+
+    // Clamp score to valid range
+    parsed.riskScore = Math.max(0, Math.min(100, Math.round(parsed.riskScore)));
+
+    return {
+      available: true,
+      riskAssessment: parsed.riskAssessment,
+      riskScore: parsed.riskScore,
+      indicators: parsed.indicators.slice(0, 10), // Limit to 10 indicators
+      summary: parsed.summary || "",
+    };
+  } catch (error) {
+    console.error("AI Analysis Error:", error.message);
+    return { available: false, reason: error.message };
+  }
+};
+
+// ═══════════════════════════════════════════════
+// Post-Hoc Explanation Generator (existing, preserved)
+// ═══════════════════════════════════════════════
 
 const generateExplanation = async (jobData, riskResult) => {
   try {
@@ -29,6 +170,10 @@ Provide a human-readable explanation that helps the user understand the risk ass
   }
 };
 
+// ═══════════════════════════════════════════════
+// Chat Assistant (existing, preserved)
+// ═══════════════════════════════════════════════
+
 const chatResponse = async (userMessage) => {
   try {
     const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
@@ -56,4 +201,4 @@ Respond helpfully:`;
   }
 };
 
-module.exports = { generateExplanation, chatResponse };
+module.exports = { analyzeWithAI, generateExplanation, chatResponse };

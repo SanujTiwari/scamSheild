@@ -1,4 +1,4 @@
-import { ShieldAlert, CheckCircle2, Info, Lightbulb, ArrowUpRight, Flag, Sparkles, AlertTriangle } from "lucide-react";
+import { ShieldAlert, CheckCircle2, Info, Lightbulb, ArrowUpRight, Flag, Sparkles, AlertTriangle, Globe, Database, Cpu, ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -11,6 +11,11 @@ export default function RiskCard({ scan, onReset }) {
   const factors = scan.risk_factors || scan.riskFactors || [];
   const recommendations = scan.recommendations || [];
   const explanation = scan.ai_explanation || scan.aiExplanation || "";
+  const confidence = scan.confidence;
+  const sources = scan.sources || [];
+  const scoreBreakdown = scan.scoreBreakdown;
+  const aiSummary = scan.aiSummary;
+  const threatIntelligence = scan.threatIntelligence;
 
   const getLevelBadgeClass = (l, s) => {
     if (s >= 81 || l === "Critical Risk") return "bg-rose-500/10 text-rose-400 border-rose-500/40 font-bold shadow-[0_0_15px_rgba(244,63,94,0.2)]";
@@ -24,6 +29,14 @@ export default function RiskCard({ scan, onReset }) {
     if (severity === "Critical" || severity === "High") return "bg-rose-500/20 text-rose-300 font-bold";
     if (severity === "Medium") return "bg-amber-500/20 text-amber-300 font-semibold";
     return "bg-white/10 text-[#94A3B8] font-medium";
+  };
+
+  const getSourceIcon = (source) => {
+    if (source.includes("Google")) return <Globe className="w-3 h-3" />;
+    if (source.includes("VirusTotal")) return <Database className="w-3 h-3" />;
+    if (source.includes("WHOIS") || source.includes("RDAP")) return <ExternalLink className="w-3 h-3" />;
+    if (source.includes("AI") || source.includes("Gemini")) return <Sparkles className="w-3 h-3" />;
+    return <Cpu className="w-3 h-3" />;
   };
 
   return (
@@ -62,19 +75,21 @@ export default function RiskCard({ scan, onReset }) {
             </div>
 
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className={`font-mono text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border ${getLevelBadgeClass(level, score)}`}>
                   {level}
                 </span>
-                <span className="font-mono text-[10px] text-[#94A3B8] uppercase tracking-wider font-semibold">
-                  AI Security Audit
-                </span>
+                {confidence !== undefined && confidence !== null && (
+                  <span className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/10 bg-[#05070B] text-[#94A3B8] font-semibold">
+                    {Math.round(confidence * 100)}% Confidence
+                  </span>
+                )}
               </div>
               <h2 className="font-display font-bold text-2xl tracking-tight text-white">
                 {score >= 61 ? "High Risk Scam Detected" : score >= 41 ? "Suspicious Activity Flagged" : "Verified Low Risk Profile"}
               </h2>
               <p className="text-[13px] text-[#94A3B8] leading-relaxed max-w-md">
-                Calculated from real-time multi-signal analysis, domain age telemetry, and neural pattern checks.
+                Calculated from multi-signal analysis combining rule-based detection, AI inspection, and external threat intelligence.
               </p>
             </div>
           </div>
@@ -97,6 +112,21 @@ export default function RiskCard({ scan, onReset }) {
             </button>
           </div>
         </div>
+
+        {/* Analysis Sources Badges */}
+        {sources.length > 0 && (
+          <div className="mt-5 flex items-center gap-2 flex-wrap">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-bold">Analysis Sources:</span>
+            {sources.map((source, i) => (
+              <span
+                key={i}
+                className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-md border border-white/10 bg-[#05070B] text-white/70 font-medium flex items-center gap-1.5"
+              >
+                {getSourceIcon(source)} {source}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* AI Explanation Banner */}
@@ -110,6 +140,78 @@ export default function RiskCard({ scan, onReset }) {
               ScamShield AI Explanation Summary
             </span>
             {explanation}
+          </div>
+        </div>
+      )}
+
+      {/* Score Breakdown (when multiple sources contributed) */}
+      {scoreBreakdown && (scoreBreakdown.aiScore !== null || scoreBreakdown.intelScore !== null) && (
+        <div className="px-6 sm:px-8 py-4 border-b border-white/10 bg-[#080C13]/20">
+          <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold block mb-3">
+            Score Breakdown
+          </span>
+          <div className="flex items-center gap-3 flex-wrap">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-[#05070B]">
+              <Cpu className="w-3.5 h-3.5 text-[#00F5A0]" />
+              <span className="font-mono text-[11px] text-white font-semibold">
+                Rules: {scoreBreakdown.ruleScore}/100
+              </span>
+              <span className="font-mono text-[9px] text-[#94A3B8]">
+                ({Math.round(scoreBreakdown.ruleWeight * 100)}%)
+              </span>
+            </div>
+            {scoreBreakdown.aiScore !== null && (
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-[#05070B]">
+                <Sparkles className="w-3.5 h-3.5 text-[#00D9FF]" />
+                <span className="font-mono text-[11px] text-white font-semibold">
+                  AI: {scoreBreakdown.aiScore}/100
+                </span>
+                <span className="font-mono text-[9px] text-[#94A3B8]">
+                  ({Math.round(scoreBreakdown.aiWeight * 100)}%)
+                </span>
+              </div>
+            )}
+            {scoreBreakdown.intelScore !== null && (
+              <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-[#05070B]">
+                <Database className="w-3.5 h-3.5 text-amber-400" />
+                <span className="font-mono text-[11px] text-white font-semibold">
+                  Intel: {scoreBreakdown.intelScore}/100
+                </span>
+                <span className="font-mono text-[9px] text-[#94A3B8]">
+                  ({Math.round(scoreBreakdown.intelWeight * 100)}%)
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Threat Intelligence Section (URL scans) */}
+      {threatIntelligence && threatIntelligence.findings && threatIntelligence.findings.length > 0 && (
+        <div className="px-6 sm:px-8 py-5 border-b border-white/10 bg-[#080C13]/30">
+          <div className="flex items-center gap-2 mb-3">
+            <AlertTriangle className="w-4 h-4 text-amber-400" />
+            <span className="font-mono text-[10px] uppercase tracking-widest text-amber-400 font-bold">
+              External Threat Intelligence
+            </span>
+            <span className="font-mono text-[9px] text-[#94A3B8] uppercase tracking-wider">
+              Domain: {threatIntelligence.domain}
+            </span>
+          </div>
+          <div className="space-y-2">
+            {threatIntelligence.findings.map((finding, i) => (
+              <div key={i} className="flex items-start gap-3 p-3 rounded-lg border border-white/10 bg-[#05070B]">
+                <span className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-md flex-shrink-0 mt-0.5 ${getSeverityBadgeClass(finding.severity)}`}>
+                  {finding.severity}
+                </span>
+                <div className="flex-1">
+                  <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-semibold block mb-0.5">
+                    {finding.source}
+                  </span>
+                  <p className="text-[12.5px] text-white leading-snug">{finding.finding}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -136,7 +238,7 @@ export default function RiskCard({ scan, onReset }) {
                   className="p-4 rounded-xl border border-white/10 bg-[#080C13] flex items-start justify-between gap-4 transition-all hover:border-white/20"
                 >
                   <div className="space-y-1.5 flex-1">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-semibold border border-white/10 px-2 py-0.5 rounded-md bg-[#05070B]">
                         {factor.category || "General"}
                       </span>
@@ -158,7 +260,7 @@ export default function RiskCard({ scan, onReset }) {
             <div className="p-8 rounded-xl border border-dashed border-white/10 text-center text-[#94A3B8] text-[13.5px] space-y-2">
               <CheckCircle2 className="w-8 h-8 text-[#00F5A0] mx-auto" />
               <p className="font-medium text-white">No High-Risk Red Flags Detected</p>
-              <p className="text-xs text-[#94A3B8]">This opportunity passed all heuristic safety algorithms clean.</p>
+              <p className="text-xs text-[#94A3B8]">This opportunity passed all heuristic, AI, and threat intelligence checks.</p>
             </div>
           )}
         </div>

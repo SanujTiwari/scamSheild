@@ -54,11 +54,14 @@ pool.query("SELECT 1")
             id SERIAL PRIMARY KEY,
             scan_id INTEGER REFERENCES scans(id) ON DELETE CASCADE,
             category VARCHAR(100) NOT NULL,
-            reason VARCHAR(255) NOT NULL,
+            reason TEXT NOT NULL,
             score INTEGER NOT NULL,
             severity VARCHAR(20) NOT NULL
           )
         `);
+
+        // Widen reason column if it was previously VARCHAR(255)
+        await pool.query(`ALTER TABLE risk_factors ALTER COLUMN reason TYPE TEXT`);
 
         // Companies verification lookup
         await pool.query(`
@@ -69,6 +72,18 @@ pool.query("SELECT 1")
             verification_status VARCHAR(50) DEFAULT 'Unverified',
             risk_score INTEGER DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+          )
+        `);
+
+        // Domain intelligence cache (for external API results — 24h TTL)
+        await pool.query(`
+          CREATE TABLE IF NOT EXISTS domain_intel_cache (
+            id SERIAL PRIMARY KEY,
+            domain VARCHAR(255) UNIQUE NOT NULL,
+            safe_browsing_result JSONB,
+            virustotal_result JSONB,
+            whois_result JSONB,
+            cached_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
           )
         `);
 
