@@ -202,7 +202,8 @@ const analyzeJob = (jobData = {}) => {
     }
   }
 
-  if (/(?:contact|reach|message|dm|call)\s*(?:on|via|through|at)?\s*(?:whatsapp|telegram|signal|wechat)/i.test(text)) {
+  if (/(?:contact|reach|message|dm|call)\s+(?:\w+\s+){0,5}(?:on|via|through|at)\s+(?:whatsapp|telegram|signal|wechat)/i.test(text) ||
+      /\b(?:on|via|through)\s+(?:whatsapp|telegram|signal|wechat)\b/i.test(text)) {
     addFactor("Communication Risk", "Communication directed via informal messaging platform", 15);
   }
 
