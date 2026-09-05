@@ -665,3 +665,39 @@ body {
   85% { transform: translateY(-402%); }
   100% { transform: translateY(-400%); }
 }
+
+/* Royal Indigo & Violet Theme Utilities */
+.glow-indigo {
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+.glow-indigo-lg {
+  box-shadow: 0 0 35px rgba(99, 102, 241, 0.4);
+}
+.glow-violet {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+}
+
+/* Cyber Focus Glow for Input Fields */
+.cyber-input {
+  background-color: #080C13;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.cyber-input:focus {
+  border-color: #6366F1;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3), inset 0 0 10px rgba(99, 102, 241, 0.08);
+  outline: none;
+}
+
+/* Interactive Card Elevate */
+.cyber-card {
+  background: #0B111A;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.cyber-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 30px -5px rgba(99, 102, 241, 0.15);
+}

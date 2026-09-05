@@ -88,14 +88,14 @@ function Navbar() {
           className="group flex items-center gap-2.5 cursor-pointer select-none"
           onClick={() => navigate('/')}
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#00F5A0] to-[#00D9FF] p-[1px] shadow-[0_0_15px_rgba(0,245,160,0.3)]">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-500 p-[1px] shadow-[0_0_15px_rgba(99,102,241,0.4)]">
             <div className="w-full h-full bg-[#05070B] rounded-[7px] flex items-center justify-center">
-              <Shield className="w-4 h-4 text-[#00F5A0]" strokeWidth={2.2} />
+              <Shield className="w-4 h-4 text-indigo-400" strokeWidth={2.2} />
             </div>
           </div>
           <span className="font-display font-bold text-[18px] tracking-tight text-white flex items-center gap-1.5">
             ScamShield
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00F5A0] animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
           </span>
         </div>
 
@@ -141,9 +141,9 @@ function Navbar() {
             <div className="relative hidden md:block" ref={dropdownRef}>
               <button
                 onClick={() => setShowDropdown(!showDropdown)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-[#080C13] hover:border-[#00F5A0]/50 transition-all cursor-pointer shadow-xs"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-[#080C13] hover:border-indigo-500/50 transition-all cursor-pointer shadow-xs"
               >
-                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] flex items-center justify-center font-mono text-[10px] font-bold text-[#05070B]">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center font-mono text-[10px] font-bold text-white">
                   {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                 </div>
                 <span className="font-mono text-[11px] text-white max-w-[100px] truncate font-medium">
@@ -162,7 +162,7 @@ function Navbar() {
                     className="absolute right-0 mt-3 w-60 rounded-xl bg-[#0B111A] border border-white/10 shadow-2xl py-2 z-50 overflow-hidden"
                   >
                     <div className="px-4 py-3 border-b border-white/10 bg-[#080C13]">
-                      <span className="font-mono text-[9px] uppercase tracking-widest text-[#00F5A0] block font-bold">AI Protection Clearance</span>
+                      <span className="font-mono text-[9px] uppercase tracking-widest text-indigo-400 block font-bold">AI Protection Clearance</span>
                       <p className="font-display font-semibold text-sm text-white mt-0.5">{user?.name || 'User'}</p>
                       <p className="font-mono text-xs text-[#94A3B8] truncate">{user?.email || ''}</p>
                     </div>
@@ -171,14 +171,14 @@ function Navbar() {
                         onClick={() => { setShowDropdown(false); navigate('/dashboard'); }}
                         className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-mono text-[11px] uppercase tracking-wider text-white hover:bg-white/5 transition-colors cursor-pointer"
                       >
-                        <BarChart3 className="w-3.5 h-3.5 text-[#00F5A0]" />
+                        <BarChart3 className="w-3.5 h-3.5 text-indigo-400" />
                         Intelligence Dashboard
                       </button>
                       <button
                         onClick={() => { setShowDropdown(false); navigate('/report-scam'); }}
                         className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-mono text-[11px] uppercase tracking-wider text-white hover:bg-white/5 transition-colors cursor-pointer"
                       >
-                        <Flag className="w-3.5 h-3.5 text-[#00D9FF]" />
+                        <Flag className="w-3.5 h-3.5 text-violet-400" />
                         Report Threat
                       </button>
                     </div>
@@ -199,7 +199,7 @@ function Navbar() {
           ) : (
             <button
               onClick={() => navigate('/auth')}
-              className="group relative font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] px-5 py-2 rounded-full font-bold hover:shadow-[0_0_20px_rgba(0,245,160,0.4)] transition-all flex items-center gap-1.5 cursor-pointer active:scale-[0.98]"
+              className="group relative font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-2 rounded-full font-bold hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all flex items-center gap-1.5 cursor-pointer active:scale-[0.98]"
             >
               Get Started
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
