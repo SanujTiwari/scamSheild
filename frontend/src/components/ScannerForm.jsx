@@ -125,9 +125,9 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
   const isExecuting = loading || parentLoading;
 
   return (
-    <div className="rounded-3xl bg-[#0B111A] border border-white/10 shadow-2xl overflow-hidden relative">
+    <div className="rounded-3xl bg-[#FDFBF7] border border-[#E5DDD4] shadow-md overflow-hidden relative">
       {/* Top Scanner Mode Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 border-b border-white/10 bg-[#080C13] p-2 gap-1.5">
+      <div className="grid grid-cols-2 sm:grid-cols-5 border-b border-[#E5DDD4] bg-[#F5EFEC] p-2 gap-1.5">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -137,23 +137,23 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
               type="button"
               onClick={() => setActiveTab(tab.id)}
               className={`relative p-3 rounded-xl text-left transition-all cursor-pointer flex flex-col justify-between ${
-                isActive ? "text-white font-semibold" : "text-[#94A3B8] hover:bg-white/5"
+                isActive ? "text-[#2B231F] font-semibold" : "text-[#665A54] hover:bg-[#E5DDD4]/40"
               }`}
             >
               {isActive && (
                 <motion.div
                   layoutId="activeScannerTab"
-                  className="absolute inset-0 rounded-xl bg-[#0B111A] border border-[#00F5A0]/40 shadow-[0_0_15px_rgba(0,245,160,0.15)]"
+                  className="absolute inset-0 rounded-xl bg-[#FDFBF7] border border-[#C86D51]/30 shadow-xs"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               <div className="relative z-10 flex items-center gap-2 mb-1">
-                <Icon className={`w-4 h-4 ${isActive ? "text-[#00F5A0]" : "text-[#94A3B8]"}`} />
+                <Icon className={`w-4 h-4 ${isActive ? "text-[#C86D51]" : "text-[#A3958B]"}`} />
                 <span className="font-display font-semibold text-[13px] tracking-tight">
                   {tab.label}
                 </span>
               </div>
-              <span className="relative z-10 font-mono text-[9px] text-[#94A3B8] truncate hidden sm:block">
+              <span className="relative z-10 font-sans text-[10px] text-[#665A54] truncate hidden sm:block">
                 {tab.desc}
               </span>
             </button>
@@ -163,8 +163,8 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
 
       {/* Quick Sample Autofill Chips */}
       <div className="px-6 pt-5 flex items-center gap-2 overflow-x-auto">
-        <span className="font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] flex items-center gap-1 font-bold flex-shrink-0">
-          <Sparkles className="w-3 h-3 text-[#00F5A0]" /> Sample Scenarios:
+        <span className="font-sans text-[10px] uppercase tracking-wider text-[#C86D51] flex items-center gap-1 font-bold flex-shrink-0">
+          <Sparkles className="w-3 h-3 text-[#C86D51]" /> Sample Scenarios:
         </span>
         {[
           { label: "Suspicious Job Offer", mode: "job", text: "Earn up to $4,200/week working from home. A refundable training fee of $89 is required via Zelle before equipment dispatch." },
@@ -176,7 +176,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
             key={idx}
             type="button"
             onClick={() => handleAutofillChip(chip.text, chip.mode)}
-            className="px-3 py-1 rounded-full border border-white/10 bg-[#080C13] hover:border-[#00F5A0]/50 font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] hover:text-white transition-all cursor-pointer whitespace-nowrap"
+            className="px-3 py-1 rounded-full border border-[#E5DDD4] bg-[#F5EFEC] hover:border-[#C86D51] font-sans text-[10px] uppercase tracking-wider text-[#665A54] hover:text-[#2B231F] transition-all cursor-pointer whitespace-nowrap"
           >
             {chip.label}
           </button>

@@ -49,50 +49,63 @@
   --radius-md: var(--radius-button-sm);
 }
 
-:root, html[data-theme="indigo"] {
-  /* Default settings (Modern Indigo) */
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --radius-card: 12px;
-  --radius-card-lg: 16px;
-  --radius-button: 8px;
-  --radius-button-sm: 6px;
+:root, html[data-theme="indigo"], html[data-theme="terracotta"] {
+  /* Default settings (Organic Terracotta & Soft Linen Palette) */
+  --font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  --radius-card: 16px;
+  --radius-card-lg: 24px;
+  --radius-button: 12px;
+  --radius-button-sm: 8px;
 
-  /* Modern Indigo Theme Palette */
-  --indigo-50: #eef2ff;
-  --indigo-100: #e0e7ff;
-  --indigo-200: #c7d2fe;
-  --indigo-300: #a5b4fc;
-  --indigo-400: #818cf8;
-  --indigo-500: #6366f1;
-  --indigo-600: #4f46e5;
-  --indigo-700: #4338ca;
-  --indigo-800: #3730a3;
-  --indigo-900: #312e81;
-  --indigo-950: #1e1b4b;
+  /* Organic Terracotta Accent Palette */
+  --indigo-50: #FBF4F0;
+  --indigo-100: #F4E2D8; /* Terracotta Sunlight */
+  --indigo-200: #E8C9B9;
+  --indigo-300: #D99F89;
+  --indigo-400: #D2856C;
+  --indigo-500: #C86D51; /* Earthy Terracotta */
+  --indigo-600: #C86D51; /* Earthy Terracotta */
+  --indigo-700: #B3583C; /* Deep Warm Terracotta Hover */
+  --indigo-800: #99452C;
+  --indigo-900: #7A3520;
+  --indigo-950: #542213;
 
-  --blue-50: #eff6ff;
-  --blue-100: #dbeafe;
-  --blue-200: #bfdbfe;
-  --blue-300: #93c5fd;
-  --blue-400: #60a5fa;
-  --blue-500: #3b82f6;
-  --blue-600: #2563eb;
-  --blue-700: #1d4ed8;
-  --blue-800: #1e40af;
-  --blue-900: #1e3a8a;
-  --blue-950: #172554;
+  /* Muted Sage & Organic Secondary Palette */
+  --blue-50: #F4F6F4;
+  --blue-100: #E2E7E2;
+  --blue-200: #C5D1C5;
+  --blue-300: #A3B5A3;
+  --blue-400: #8E9F8E;
+  --blue-500: #7B8C7B; /* Muted Sage / Botanical Green */
+  --blue-600: #6B7B6B;
+  --blue-700: #5A6A5A;
+  --blue-800: #495849;
+  --blue-900: #384638;
+  --blue-950: #253125;
 
-  --slate-50: #f8fafc;
-  --slate-100: #f1f5f9;
-  --slate-200: #e2e8f0;
-  --slate-300: #cbd5e1;
-  --slate-400: #94a3b8;
-  --slate-500: #64748b;
-  --slate-600: #475569;
-  --slate-700: #334155;
-  --slate-800: #1e293b;
-  --slate-900: #0f172a;
-  --slate-950: #020617;
+  /* Soft Linen & Espresso Surface Palette (NO pure black #000000) */
+  --slate-50: #FDFBF7; /* Warm Linen Parchment Primary Background */
+  --slate-100: #F5EFEC; /* Soft Warm Sand Card Surface */
+  --slate-200: #E5DDD4; /* Warm Oat Tint Borders & Dividers */
+  --slate-300: #D8CDC2; /* Oat Divider Lines */
+  --slate-400: #A3958B; /* Muted Clay Icons */
+  --slate-500: #7D7067; /* Secondary Text */
+  --slate-600: #665A54; /* Warm Clay Charcoal Text Muted */
+  --slate-700: #4A3F39; /* Deep Warm Wood Subheadings */
+  --slate-800: #2B231F; /* Rich Espresso Dark Wood Text Main */
+  --slate-900: #2B231F; /* Rich Espresso Dark Wood Headings */
+  --slate-950: #1E1916; /* Deep Warm Wood Dark Surface */
+
+  /* Global UI CSS Variables */
+  --paper: #FDFBF7;
+  --surface: #F5EFEC;
+  --ink: #2B231F;
+  --ink-muted: #665A54;
+  --terracotta: #C86D51;
+  --terracotta-hover: #B3583C;
+  --sage: #7B8C7B;
+  --oat: #E5DDD4;
+  --sunlight: #F4E2D8;
 }
 
 /* Font definitions mapping */
@@ -498,9 +511,9 @@ html {
 }
 
 body {
-  background-color: var(--paper, #05070B);
-  color: var(--ink, #F8FAFC);
-  font-family: 'Inter', sans-serif;
+  background-color: var(--paper, #FDFBF7);
+  color: var(--ink, #2B231F);
+  font-family: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   -webkit-font-smoothing: antialiased;
 }

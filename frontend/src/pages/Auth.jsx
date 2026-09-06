@@ -117,32 +117,32 @@ export default function Auth() {
 
         <main className="max-w-5xl mx-auto px-4 sm:px-6 my-8 w-full flex-1 flex items-center justify-center">
           {/* Main Glass Card Container */}
-          <div className="w-full grid grid-cols-1 lg:grid-cols-12 rounded-3xl border border-white/10 bg-[#0B111A] shadow-[0_20px_60px_rgba(0,0,0,0.8)] overflow-hidden relative">
+          <div className="w-full grid grid-cols-1 lg:grid-cols-12 rounded-3xl border border-[#E5DDD4] bg-[#FDFBF7] shadow-md overflow-hidden relative">
             
             {/* Left Column: Form Panel */}
-            <div className="lg:col-span-7 p-8 sm:p-12 space-y-7 flex flex-col justify-center bg-[#0B111A]">
+            <div className="lg:col-span-7 p-8 sm:p-12 space-y-7 flex flex-col justify-center bg-[#FDFBF7]">
               
               {/* Header Badge & Title */}
               <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#00F5A0]/30 bg-[#080C13]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00F5A0] animate-pulse" />
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#00F5A0] font-bold">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#C86D51]/30 bg-[#F5EFEC]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C86D51] animate-pulse" />
+                  <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] font-bold">
                     AUTHENTICATION PORTAL // CLEARANCE
                   </span>
                 </div>
 
-                <h1 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-white">
+                <h1 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-[#2B231F]">
                   {isLoginState ? "Sign In to ScamShield" : "Create Investigator Account"}
                 </h1>
                 
-                <p className="text-[14.5px] text-[#94A3B8]">
+                <p className="text-[14.5px] text-[#665A54]">
                   {isLoginState ? (
                     <>
                       Don't have an account?{" "}
                       <button
                         type="button"
                         onClick={() => setIsLoginState(false)}
-                        className="font-mono text-[12px] uppercase font-bold text-[#00F5A0] hover:text-[#00D9FF] hover:underline cursor-pointer transition-colors"
+                        className="font-sans text-[12px] uppercase font-bold text-[#C86D51] hover:text-[#B3583C] hover:underline cursor-pointer transition-colors"
                       >
                         Sign up free &rarr;
                       </button>
@@ -153,7 +153,7 @@ export default function Auth() {
                       <button
                         type="button"
                         onClick={() => setIsLoginState(true)}
-                        className="font-mono text-[12px] uppercase font-bold text-[#00F5A0] hover:text-[#00D9FF] hover:underline cursor-pointer transition-colors"
+                        className="font-sans text-[12px] uppercase font-bold text-[#C86D51] hover:text-[#B3583C] hover:underline cursor-pointer transition-colors"
                       >
                         Sign in &rarr;
                       </button>
@@ -174,18 +174,18 @@ export default function Auth() {
                       transition={{ duration: 0.2 }}
                       className="space-y-1.5"
                     >
-                      <label className="font-mono text-[10.5px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                      <label className="font-sans text-[10.5px] uppercase tracking-wider text-[#C86D51] font-bold">
                         Full Name *
                       </label>
                       <div className="relative">
-                        <User className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-3.5" />
+                        <User className="w-4 h-4 text-[#A3958B] absolute left-3.5 top-3.5" />
                         <input
                           type="text"
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Alex Morgan"
-                          className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] focus:ring-1 focus:ring-[#00F5A0] text-white outline-none transition-all placeholder-[#94A3B8]/40"
+                          className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#F5EFEC] border border-[#E5DDD4] focus:border-[#C86D51] focus:ring-1 focus:ring-[#C86D51] text-[#2B231F] outline-none transition-all placeholder-[#A3958B]"
                         />
                       </div>
                     </motion.div>
@@ -193,25 +193,25 @@ export default function Auth() {
                 </AnimatePresence>
 
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[10.5px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                  <label className="font-sans text-[10.5px] uppercase tracking-wider text-[#C86D51] font-bold">
                     Email Address *
                   </label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-3.5" />
+                    <Mail className="w-4 h-4 text-[#A3958B] absolute left-3.5 top-3.5" />
                     <input
                       type="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="you@domain.com"
-                      className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] focus:ring-1 focus:ring-[#00F5A0] text-white outline-none transition-all placeholder-[#94A3B8]/40"
+                      className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#F5EFEC] border border-[#E5DDD4] focus:border-[#C86D51] focus:ring-1 focus:ring-[#C86D51] text-[#2B231F] outline-none transition-all placeholder-[#A3958B]"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <label className="font-mono text-[10.5px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                    <label className="font-sans text-[10.5px] uppercase tracking-wider text-[#C86D51] font-bold">
                       Password *
                     </label>
                     {isLoginState && (

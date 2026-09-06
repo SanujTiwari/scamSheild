@@ -172,20 +172,20 @@ function Dashboard() {
   if (isLoading) return <LoadingSpinner message="Loading Fraud Intelligence Console..." />;
 
   return (
-    <div className="min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-[#00F5A0] selection:text-[#05070B]">
+    <div className="min-h-screen bg-[#FDFBF7] text-[#2B231F] selection:bg-[#F4E2D8] selection:text-[#C86D51]">
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#E5DDD4] pb-6">
           <div>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#00F5A0] font-bold">
+            <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] font-bold">
               AI Fraud Intelligence Unit
             </span>
-            <h1 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-white mt-1">
+            <h1 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-[#2B231F] mt-1">
               Case File Dashboard
             </h1>
-            <p className="text-[#94A3B8] text-[14px] mt-1 font-normal">
+            <p className="text-[#665A54] text-[14px] mt-1 font-normal">
               Monitor real-time threat telemetry, scan distributions, and historical intake.
             </p>
           </div>
@@ -193,13 +193,13 @@ function Dashboard() {
           <div className="flex items-center gap-3">
             <button
               onClick={fetchData}
-              className="font-mono text-[11px] uppercase tracking-widest border border-white/10 bg-[#080C13] hover:border-white/20 px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer text-white font-medium shadow-xs"
+              className="font-sans text-xs uppercase tracking-widest border border-[#E5DDD4] bg-[#FDFBF7] hover:bg-[#F5EFEC] px-4 py-2.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer text-[#2B231F] font-medium shadow-xs"
             >
               <RefreshCcw className="w-3.5 h-3.5" /> Refresh
             </button>
             <button
               onClick={() => navigate("/scanner")}
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] px-5 py-2.5 rounded-xl hover:shadow-[0_0_20px_rgba(0,245,160,0.3)] transition-all flex items-center gap-1.5 cursor-pointer font-bold shadow-xs"
+              className="font-sans text-xs uppercase tracking-widest bg-[#C86D51] hover:bg-[#B3583C] text-white px-5 py-2.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer font-bold shadow-xs"
             >
               <Plus className="w-4 h-4" /> Execute Scan
             </button>
@@ -212,62 +212,62 @@ function Dashboard() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="p-5 rounded-2xl border border-white/10 bg-[#0B111A] space-y-2 shadow-xl"
+            className="p-5 rounded-2xl border border-[#E5DDD4] bg-[#FDFBF7] space-y-2 shadow-xs"
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold">Total Scans</span>
-              <Activity className="w-4 h-4 text-[#94A3B8]" />
+              <span className="font-sans text-[10px] uppercase tracking-widest text-[#665A54] font-bold">Total Scans</span>
+              <Activity className="w-4 h-4 text-[#A3958B]" />
             </div>
-            <p className="font-mono text-3xl font-extrabold text-white">{stats.total}</p>
-            <p className="text-[12px] text-[#94A3B8]">Processed across all modules</p>
+            <p className="font-sans text-3xl font-extrabold text-[#2B231F]">{stats.total}</p>
+            <p className="text-[12px] text-[#665A54]">Processed across all modules</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.05 }}
-            className="p-5 rounded-2xl border border-rose-500/30 bg-rose-500/10 space-y-2 shadow-xl"
+            className="p-5 rounded-2xl border border-[#C86D51]/30 bg-[#F4E2D8]/50 space-y-2 shadow-xs"
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-rose-400 font-extrabold">Critical Risk</span>
-              <ShieldAlert className="w-4 h-4 text-rose-400" />
+              <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] font-extrabold">Critical Risk</span>
+              <ShieldAlert className="w-4 h-4 text-[#C86D51]" />
             </div>
-            <p className="font-mono text-3xl font-extrabold text-rose-400">{stats.critical}</p>
-            <p className="text-[12px] text-rose-300 font-medium">Immediate caution required</p>
+            <p className="font-sans text-3xl font-extrabold text-[#C86D51]">{stats.critical}</p>
+            <p className="text-[12px] text-[#B3583C] font-medium">Immediate caution required</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="p-5 rounded-2xl border border-rose-400/20 bg-[#0B111A] space-y-2 shadow-xl"
+            className="p-5 rounded-2xl border border-[#C86D51]/20 bg-[#FDFBF7] space-y-2 shadow-xs"
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-rose-400 font-extrabold">High Risk</span>
-              <AlertTriangle className="w-4 h-4 text-rose-400" />
+              <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] font-extrabold">High Risk</span>
+              <AlertTriangle className="w-4 h-4 text-[#C86D51]" />
             </div>
-            <p className="font-mono text-3xl font-extrabold text-rose-400">{stats.high}</p>
-            <p className="text-[12px] text-rose-400 font-medium">High probability scam flags</p>
+            <p className="font-sans text-3xl font-extrabold text-[#C86D51]">{stats.high}</p>
+            <p className="text-[12px] text-[#C86D51] font-medium">High probability scam flags</p>
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
-            className="p-5 rounded-2xl border border-[#00F5A0]/30 bg-[#00F5A0]/10 space-y-2 shadow-xl"
+            className="p-5 rounded-2xl border border-[#7B8C7B]/30 bg-[#E2E7E2]/50 space-y-2 shadow-xs"
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#00F5A0] font-extrabold">Verified / Safe</span>
-              <CheckCircle className="w-4 h-4 text-[#00F5A0]" />
+              <span className="font-sans text-[10px] uppercase tracking-widest text-[#7B8C7B] font-extrabold">Verified / Safe</span>
+              <CheckCircle className="w-4 h-4 text-[#7B8C7B]" />
             </div>
-            <p className="font-mono text-3xl font-extrabold text-[#00F5A0]">{stats.safeLow}</p>
-            <p className="text-[12px] text-[#00F5A0] font-medium">Minimal threat profiles</p>
+            <p className="font-sans text-3xl font-extrabold text-[#7B8C7B]">{stats.safeLow}</p>
+            <p className="text-[12px] text-[#5A6A5A] font-medium">Minimal threat profiles</p>
           </motion.div>
         </div>
 
         {/* Scam Type Distribution Breakdown */}
-        <div className="p-6 rounded-2xl border border-white/10 bg-[#0B111A] space-y-4 shadow-xl">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] block font-bold">
+        <div className="p-6 rounded-2xl border border-[#E5DDD4] bg-[#FDFBF7] space-y-4 shadow-xs">
+          <span className="font-sans text-[10px] uppercase tracking-widest text-[#665A54] block font-bold">
             Scam Type Distribution Breakdown
           </span>
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
@@ -280,12 +280,12 @@ function Dashboard() {
             ].map((item) => {
               const Icon = item.icon;
               return (
-                <div key={item.type} className="p-3.5 rounded-xl border border-white/10 bg-[#080C13] flex items-center justify-between">
+                <div key={item.type} className="p-3.5 rounded-xl border border-[#E5DDD4] bg-[#F5EFEC] flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Icon className="w-4 h-4 text-[#94A3B8]" />
-                    <span className="font-display text-[13px] font-medium text-white">{item.label}</span>
+                    <Icon className="w-4 h-4 text-[#665A54]" />
+                    <span className="font-display text-[13px] font-medium text-[#2B231F]">{item.label}</span>
                   </div>
-                  <span className="font-mono text-[13px] font-bold text-[#00F5A0]">{item.count}</span>
+                  <span className="font-sans text-[13px] font-bold text-[#C86D51]">{item.count}</span>
                 </div>
               );
             })}
@@ -293,15 +293,15 @@ function Dashboard() {
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#0B111A] p-4 rounded-2xl border border-white/10 shadow-xl">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 bg-[#FDFBF7] p-4 rounded-2xl border border-[#E5DDD4] shadow-xs">
           <div className="relative flex-1">
-            <Search className="w-4 h-4 text-[#94A3B8] absolute left-3.5 top-3" />
+            <Search className="w-4 h-4 text-[#665A54] absolute left-3.5 top-3" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search case files by keyword, title, sender, or entity..."
-              className="w-full pl-10 pr-4 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none"
+              className="w-full pl-10 pr-4 py-2 text-[13px] rounded-xl bg-[#F5EFEC] border border-[#E5DDD4] focus:border-[#C86D51] text-[#2B231F] outline-none placeholder-[#A3958B]"
             />
           </div>
 
@@ -309,7 +309,7 @@ function Dashboard() {
             <select
               value={activeType}
               onChange={(e) => setActiveType(e.target.value)}
-              className="px-3.5 py-2 rounded-xl font-mono text-[11px] uppercase tracking-wider bg-[#080C13] border border-white/10 text-white outline-none cursor-pointer"
+              className="px-3.5 py-2 rounded-xl font-sans text-xs uppercase tracking-wider bg-[#F5EFEC] border border-[#E5DDD4] text-[#2B231F] outline-none cursor-pointer font-medium"
             >
               <option value="all">All Scanner Types</option>
               <option value="job">Job Scans</option>
@@ -322,7 +322,7 @@ function Dashboard() {
             <select
               value={activeLevel}
               onChange={(e) => setActiveLevel(e.target.value)}
-              className="px-3.5 py-2 rounded-xl font-mono text-[11px] uppercase tracking-wider bg-[#080C13] border border-white/10 text-white outline-none cursor-pointer"
+              className="px-3.5 py-2 rounded-xl font-sans text-xs uppercase tracking-wider bg-[#F5EFEC] border border-[#E5DDD4] text-[#2B231F] outline-none cursor-pointer font-medium"
             >
               <option value="all">All Risk Levels</option>
               <option value="critical">Critical Risk (81-100)</option>
@@ -348,40 +348,40 @@ function Dashboard() {
                   initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
-                  className="p-5 rounded-2xl border border-white/10 bg-[#0B111A] flex flex-col justify-between space-y-4 hover:border-white/20 transition-all shadow-xl"
+                  className="p-5 rounded-2xl border border-[#E5DDD4] bg-[#FDFBF7] flex flex-col justify-between space-y-4 hover:border-[#C86D51]/40 transition-all shadow-xs"
                 >
                   <div className="space-y-2.5">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         {getScanTypeIcon(type)}
-                        <span className="font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] border border-white/10 px-2 py-0.5 rounded-md bg-[#080C13] font-semibold">
+                        <span className="font-sans text-[10px] uppercase tracking-wider text-[#665A54] border border-[#E5DDD4] px-2 py-0.5 rounded-md bg-[#F5EFEC] font-semibold">
                           {type}
                         </span>
                       </div>
-                      <span className="font-mono text-[10px] text-[#94A3B8]">
+                      <span className="font-sans text-[10px] text-[#665A54]">
                         {new Date(scan.created_at || Date.now()).toLocaleDateString()}
                       </span>
                     </div>
 
-                    <h3 className="font-display font-semibold text-[16px] text-white line-clamp-1">
+                    <h3 className="font-display font-semibold text-[16px] text-[#2B231F] line-clamp-1">
                       {getTitle(scan)}
                     </h3>
 
                     {scan.ai_explanation && (
-                      <p className="text-[13px] text-[#94A3B8] line-clamp-2 leading-relaxed">
+                      <p className="text-[13px] text-[#665A54] line-clamp-2 leading-relaxed">
                         {scan.ai_explanation}
                       </p>
                     )}
                   </div>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-white/10">
+                  <div className="flex items-center justify-between pt-3 border-t border-[#E5DDD4]">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-[11px] font-bold text-white">Score: {score}/100</span>
-                      <span className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-md border ${
-                        score >= 81 ? "border-rose-500/40 bg-rose-500/10 text-rose-400 font-bold" :
-                        score >= 61 ? "border-rose-500/30 bg-rose-500/10 text-rose-400 font-bold" :
-                        score >= 41 ? "border-amber-500/30 bg-amber-500/10 text-amber-400 font-semibold" :
-                        "border-[#00F5A0]/30 bg-[#00F5A0]/10 text-[#00F5A0] font-semibold"
+                      <span className="font-sans text-[11px] font-bold text-[#2B231F]">Score: {score}/100</span>
+                      <span className={`font-sans text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-md border ${
+                        score >= 81 ? "border-[#C86D51] bg-[#F4E2D8] text-[#C86D51] font-bold" :
+                        score >= 61 ? "border-[#C86D51]/60 bg-[#F4E2D8] text-[#C86D51] font-bold" :
+                        score >= 41 ? "border-[#D9822B]/60 bg-[#F5EFEC] text-[#D9822B] font-semibold" :
+                        "border-[#7B8C7B]/60 bg-[#E2E7E2] text-[#7B8C7B] font-semibold"
                       }`}>
                         {level}
                       </span>
@@ -390,21 +390,21 @@ function Dashboard() {
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => setSelectedScan(scan)}
-                        className="p-2 rounded-lg border border-white/10 hover:border-white/20 text-white transition-colors cursor-pointer"
+                        className="p-2 rounded-lg border border-[#E5DDD4] hover:bg-[#F5EFEC] text-[#2B231F] transition-colors cursor-pointer"
                         title="View Full Case File"
                       >
                         <Eye className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => generateAnalysisPDF(scan)}
-                        className="p-2 rounded-lg border border-white/10 hover:border-white/20 text-white transition-colors cursor-pointer"
+                        className="p-2 rounded-lg border border-[#E5DDD4] hover:bg-[#F5EFEC] text-[#2B231F] transition-colors cursor-pointer"
                         title="Export PDF Report"
                       >
                         <FileText className="w-3.5 h-3.5" />
                       </button>
                       <button
                         onClick={() => handleDelete(scan.id)}
-                        className="p-2 rounded-lg border border-white/10 hover:border-rose-500/40 text-rose-400 transition-colors cursor-pointer"
+                        className="p-2 rounded-lg border border-[#E5DDD4] hover:bg-[#F4E2D8] text-[#C86D51] transition-colors cursor-pointer"
                         title="Delete Case File"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
@@ -416,15 +416,15 @@ function Dashboard() {
             })}
           </div>
         ) : (
-          <div className="p-12 rounded-2xl border border-dashed border-white/10 bg-[#0B111A] text-center space-y-3">
-            <ShieldAlert className="w-10 h-10 text-[#94A3B8] mx-auto" />
-            <h3 className="font-display font-semibold text-lg text-white">No Case Files Match Filter</h3>
-            <p className="text-[13.5px] text-[#94A3B8] max-w-sm mx-auto">
+          <div className="p-12 rounded-2xl border border-dashed border-[#E5DDD4] bg-[#FDFBF7] text-center space-y-3">
+            <ShieldAlert className="w-10 h-10 text-[#A3958B] mx-auto" />
+            <h3 className="font-display font-semibold text-lg text-[#2B231F]">No Case Files Match Filter</h3>
+            <p className="text-[13.5px] text-[#665A54] max-w-sm mx-auto">
               No scan records match your active search terms or risk filters. Try clearing your filters or execute a new scan.
             </p>
             <button
               onClick={() => navigate("/scanner")}
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] px-5 py-2.5 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer mt-2 font-bold"
+              className="font-sans text-xs uppercase tracking-widest bg-[#C86D51] hover:bg-[#B3583C] text-white px-5 py-2.5 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer mt-2 font-bold"
             >
               Start New Scan
             </button>
@@ -435,7 +435,7 @@ function Dashboard() {
       {/* Selected Scan Modal */}
       <AnimatePresence>
         {selectedScan && (
-          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 bg-[#2B231F]/40 backdrop-blur-md flex items-center justify-center p-4 overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -455,6 +455,7 @@ function Dashboard() {
       <ChatBot />
     </div>
   );
+}
 }
 
 export default Dashboard;

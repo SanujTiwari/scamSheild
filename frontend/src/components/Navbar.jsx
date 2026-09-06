@@ -79,8 +79,8 @@ function Navbar() {
       <div
         className={`max-w-6xl mx-auto rounded-full border transition-all duration-300 px-5 py-2.5 flex items-center justify-between ${
           scrolled
-            ? "bg-[#080C13]/90 backdrop-blur-xl border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
-            : "bg-[#0B111A]/60 backdrop-blur-lg border-white/10"
+            ? "bg-[#FDFBF7]/95 backdrop-blur-xl border-[#E5DDD4] shadow-sm"
+            : "bg-[#F5EFEC]/80 backdrop-blur-lg border-[#E5DDD4]"
         }`}
       >
         {/* Logo */}
@@ -88,19 +88,19 @@ function Navbar() {
           className="group flex items-center gap-2.5 cursor-pointer select-none"
           onClick={() => navigate('/')}
         >
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-500 p-[1px] shadow-[0_0_15px_rgba(99,102,241,0.4)]">
-            <div className="w-full h-full bg-[#05070B] rounded-[7px] flex items-center justify-center">
-              <Shield className="w-4 h-4 text-indigo-400" strokeWidth={2.2} />
+          <div className="w-8 h-8 rounded-lg bg-[#C86D51] p-[1px] shadow-xs">
+            <div className="w-full h-full bg-[#FDFBF7] rounded-[7px] flex items-center justify-center">
+              <Shield className="w-4 h-4 text-[#C86D51]" strokeWidth={2.2} />
             </div>
           </div>
-          <span className="font-display font-bold text-[18px] tracking-tight text-white flex items-center gap-1.5">
+          <span className="font-display font-bold text-[18px] tracking-tight text-[#2B231F] flex items-center gap-1.5">
             ScamShield
-            <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C86D51] animate-pulse" />
           </span>
         </div>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden md:flex items-center gap-1 bg-[#05070B]/50 p-1 border border-white/5 rounded-full">
+        <nav className="hidden md:flex items-center gap-1 bg-[#F5EFEC] p-1 border border-[#E5DDD4] rounded-full">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
             if (link.isAnchor) {
@@ -108,7 +108,7 @@ function Navbar() {
                 <a
                   key={link.path}
                   href={link.path}
-                  className="px-4 py-1.5 rounded-full font-mono text-[11px] uppercase tracking-wider text-[#94A3B8] hover:text-white hover:bg-white/5 transition-all"
+                  className="px-4 py-1.5 rounded-full font-sans text-xs uppercase tracking-wider text-[#665A54] hover:text-[#2B231F] hover:bg-[#E5DDD4]/50 transition-all font-medium"
                 >
                   {link.label}
                 </a>
@@ -118,14 +118,14 @@ function Navbar() {
               <button
                 key={link.path}
                 onClick={() => navigate(link.path)}
-                className={`relative px-4 py-1.5 rounded-full font-mono text-[11px] uppercase tracking-wider transition-all cursor-pointer ${
-                  isActive ? "text-white font-semibold" : "text-[#94A3B8] hover:text-white hover:bg-white/5"
+                className={`relative px-4 py-1.5 rounded-full font-sans text-xs uppercase tracking-wider transition-all cursor-pointer font-medium ${
+                  isActive ? "text-[#2B231F] font-semibold" : "text-[#665A54] hover:text-[#2B231F] hover:bg-[#E5DDD4]/50"
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activePill"
-                    className="absolute inset-0 rounded-full bg-white/10 border border-white/10"
+                    className="absolute inset-0 rounded-full bg-[#F4E2D8] border border-[#C86D51]/20"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -141,15 +141,15 @@ function Navbar() {
             <div className="relative hidden md:block" ref={dropdownRef}>
               <button
                 onClick={() => setShowDropdown(!showDropdown)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-[#080C13] hover:border-indigo-500/50 transition-all cursor-pointer shadow-xs"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#E5DDD4] bg-[#FDFBF7] hover:border-[#C86D51] transition-all cursor-pointer shadow-xs"
               >
-                <div className="w-6 h-6 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 flex items-center justify-center font-mono text-[10px] font-bold text-white">
+                <div className="w-6 h-6 rounded-full bg-[#C86D51] flex items-center justify-center font-sans text-[10px] font-bold text-white">
                   {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                 </div>
-                <span className="font-mono text-[11px] text-white max-w-[100px] truncate font-medium">
+                <span className="font-sans text-xs text-[#2B231F] max-w-[100px] truncate font-medium">
                   {user?.name || 'User'}
                 </span>
-                <ChevronDown className={`w-3.5 h-3.5 text-[#94A3B8] transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`w-3.5 h-3.5 text-[#665A54] transition-transform ${showDropdown ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -159,34 +159,34 @@ function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 6, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 mt-3 w-60 rounded-xl bg-[#0B111A] border border-white/10 shadow-2xl py-2 z-50 overflow-hidden"
+                    className="absolute right-0 mt-3 w-60 rounded-xl bg-[#FDFBF7] border border-[#E5DDD4] shadow-xl py-2 z-50 overflow-hidden"
                   >
-                    <div className="px-4 py-3 border-b border-white/10 bg-[#080C13]">
-                      <span className="font-mono text-[9px] uppercase tracking-widest text-indigo-400 block font-bold">AI Protection Clearance</span>
-                      <p className="font-display font-semibold text-sm text-white mt-0.5">{user?.name || 'User'}</p>
-                      <p className="font-mono text-xs text-[#94A3B8] truncate">{user?.email || ''}</p>
+                    <div className="px-4 py-3 border-b border-[#E5DDD4] bg-[#F5EFEC]">
+                      <span className="font-sans text-[9px] uppercase tracking-widest text-[#C86D51] block font-bold">Protection Account</span>
+                      <p className="font-display font-semibold text-sm text-[#2B231F] mt-0.5">{user?.name || 'User'}</p>
+                      <p className="font-sans text-xs text-[#665A54] truncate">{user?.email || ''}</p>
                     </div>
                     <div className="p-1">
                       <button
                         onClick={() => { setShowDropdown(false); navigate('/dashboard'); }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-mono text-[11px] uppercase tracking-wider text-white hover:bg-white/5 transition-colors cursor-pointer"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-sans text-xs uppercase tracking-wider text-[#2B231F] hover:bg-[#F5EFEC] transition-colors cursor-pointer"
                       >
-                        <BarChart3 className="w-3.5 h-3.5 text-indigo-400" />
+                        <BarChart3 className="w-3.5 h-3.5 text-[#C86D51]" />
                         Intelligence Dashboard
                       </button>
                       <button
                         onClick={() => { setShowDropdown(false); navigate('/report-scam'); }}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-mono text-[11px] uppercase tracking-wider text-white hover:bg-white/5 transition-colors cursor-pointer"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-sans text-xs uppercase tracking-wider text-[#2B231F] hover:bg-[#F5EFEC] transition-colors cursor-pointer"
                       >
-                        <Flag className="w-3.5 h-3.5 text-violet-400" />
+                        <Flag className="w-3.5 h-3.5 text-[#7B8C7B]" />
                         Report Threat
                       </button>
                     </div>
-                    <div className="border-t border-white/10 my-1" />
+                    <div className="border-t border-[#E5DDD4] my-1" />
                     <div className="p-1">
                       <button
                         onClick={handleLogout}
-                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-mono text-[11px] uppercase tracking-wider text-[#F43F5E] hover:bg-rose-500/10 transition-colors cursor-pointer"
+                        className="w-full flex items-center gap-2.5 px-3 py-2 rounded-lg font-sans text-xs uppercase tracking-wider text-[#C86D51] hover:bg-[#F4E2D8]/50 transition-colors cursor-pointer"
                       >
                         <LogOut className="w-3.5 h-3.5" />
                         Sign Out
@@ -199,7 +199,7 @@ function Navbar() {
           ) : (
             <button
               onClick={() => navigate('/auth')}
-              className="group relative font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-2 rounded-full font-bold hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all flex items-center gap-1.5 cursor-pointer active:scale-[0.98]"
+              className="group relative font-sans text-xs uppercase tracking-widest bg-[#C86D51] hover:bg-[#B3583C] text-white px-5 py-2 rounded-full font-bold shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 cursor-pointer active:scale-[0.98]"
             >
               Get Started
               <ArrowRight className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5" />
