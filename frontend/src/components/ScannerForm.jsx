@@ -127,9 +127,9 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
   const isExecuting = loading || parentLoading;
 
   return (
-    <div className="rounded-3xl bg-[#0B111A] border border-white/10 shadow-2xl overflow-hidden relative">
+    <div className="rounded-3xl bg-[#FDFBF7] border border-[#E5DDD4] shadow-md overflow-hidden relative">
       {/* Top Scanner Mode Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 border-b border-white/10 bg-[#080C13] p-2 gap-1.5">
+      <div className="grid grid-cols-2 sm:grid-cols-5 border-b border-[#E5DDD4] bg-[#F5EFEC] p-2 gap-1.5">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -139,23 +139,31 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
               type="button"
               onClick={() => setActiveTab(tab.id)}
               className={`relative p-3 rounded-xl text-left transition-all cursor-pointer flex flex-col justify-between ${
-                isActive ? "text-white font-semibold" : "text-[#94A3B8] hover:bg-white/5"
+                isActive ? "text-[#2B231F] font-semibold" : "text-[#665A54] hover:bg-[#E5DDD4]/40"
               }`}
             >
               {isActive && (
                 <motion.div
                   layoutId="activeScannerTab"
+<<<<<<< HEAD
                   className="absolute inset-0 rounded-xl bg-[#0B111A] border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
+=======
+                  className="absolute inset-0 rounded-xl bg-[#FDFBF7] border border-[#C86D51]/30 shadow-xs"
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               <div className="relative z-10 flex items-center gap-2 mb-1">
+<<<<<<< HEAD
                 <Icon className={`w-4 h-4 ${isActive ? "text-indigo-400" : "text-[#94A3B8]"}`} />
+=======
+                <Icon className={`w-4 h-4 ${isActive ? "text-[#C86D51]" : "text-[#A3958B]"}`} />
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                 <span className="font-display font-semibold text-[13px] tracking-tight">
                   {tab.label}
                 </span>
               </div>
-              <span className="relative z-10 font-mono text-[9px] text-[#94A3B8] truncate hidden sm:block">
+              <span className="relative z-10 font-sans text-[10px] text-[#665A54] truncate hidden sm:block">
                 {tab.desc}
               </span>
             </button>
@@ -164,9 +172,15 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
       </div>
 
       {/* Quick Sample Autofill Chips */}
+<<<<<<< HEAD
       <div className="px-6 pt-5 flex items-center gap-2 overflow-x-auto pb-1">
         <span className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 flex items-center gap-1 font-bold flex-shrink-0 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">
           <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" /> Try Samples:
+=======
+      <div className="px-6 pt-5 flex items-center gap-2 overflow-x-auto">
+        <span className="font-sans text-[10px] uppercase tracking-wider text-[#C86D51] flex items-center gap-1 font-bold flex-shrink-0">
+          <Sparkles className="w-3 h-3 text-[#C86D51]" /> Sample Scenarios:
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
         </span>
         {[
           { label: "Suspicious Job Offer", mode: "job", text: "Earn up to $4,200/week working from home. A refundable training fee of $89 is required via Zelle before equipment dispatch." },
@@ -178,11 +192,16 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
           <button
             key={idx}
             type="button"
+<<<<<<< HEAD
             onClick={() => {
               handleAutofillChip(chip.text, chip.mode);
               toast.success(`Loaded sample: ${chip.label}`);
             }}
             className="px-3.5 py-1.5 rounded-full border border-white/10 bg-[#080C13] hover:border-indigo-500/60 hover:bg-indigo-500/10 font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] hover:text-white transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 group active:scale-95 shadow-xs"
+=======
+            onClick={() => handleAutofillChip(chip.text, chip.mode)}
+            className="px-3 py-1 rounded-full border border-[#E5DDD4] bg-[#F5EFEC] hover:border-[#C86D51] font-sans text-[10px] uppercase tracking-wider text-[#665A54] hover:text-[#2B231F] transition-all cursor-pointer whitespace-nowrap"
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
           >
             <Zap className="w-3 h-3 text-indigo-400 opacity-60 group-hover:opacity-100 transition-opacity" />
             {chip.label}

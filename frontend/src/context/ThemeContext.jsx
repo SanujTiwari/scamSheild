@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 const ThemeContext = createContext();
 
 const DEFAULT_SETTINGS = {
-  theme: "arctic",
+  theme: "terracotta",
   darkMode: false,
   font: "outfit",
   radius: "squircle",
@@ -20,17 +20,12 @@ export function ThemeProvider({ children }) {
         const parsed = JSON.parse(stored);
         return {
           ...DEFAULT_SETTINGS,
-          theme: parsed.theme || "arctic",
+          theme: parsed.theme || "terracotta",
           darkMode: parsed.darkMode !== undefined ? parsed.darkMode : false,
         };
       }
     } catch (e) {
       console.error("Failed to parse stored settings, using defaults.");
-    }
-    // Fallback to old theme state if present (for seamless migration)
-    const oldTheme = localStorage.getItem("jobshield-theme");
-    if (oldTheme) {
-      return { ...DEFAULT_SETTINGS, darkMode: oldTheme === "dark" };
     }
     return DEFAULT_SETTINGS;
   });
@@ -38,11 +33,10 @@ export function ThemeProvider({ children }) {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
-    // Always force Light Warm Paper Mode
     const root = document.documentElement;
+    root.setAttribute("data-theme", settings.theme || "terracotta");
+    root.setAttribute("data-font", settings.font || "outfit");
     root.classList.remove("dark");
-    localStorage.removeItem("jobshield-theme");
-    localStorage.removeItem("jobshield-settings");
   }, [settings]);
 
   const updateSetting = (key, value) => {

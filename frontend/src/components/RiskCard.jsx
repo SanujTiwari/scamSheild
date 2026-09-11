@@ -18,25 +18,33 @@ export default function RiskCard({ scan, onReset }) {
   const threatIntelligence = scan.threatIntelligence;
 
   const getLevelBadgeClass = (l, s) => {
+<<<<<<< HEAD
     if (s >= 81 || l === "Critical Risk") return "bg-rose-500/10 text-rose-400 border-rose-500/40 font-bold shadow-[0_0_15px_rgba(244,63,94,0.2)]";
     if (s >= 61 || l === "High Risk") return "bg-rose-500/10 text-rose-400 border-rose-500/30 font-bold";
     if (s >= 41 || l === "Medium Risk") return "bg-amber-500/10 text-amber-400 border-amber-500/30 font-semibold";
     if (s >= 21 || l === "Low Risk") return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30 font-medium";
     return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30 font-semibold shadow-[0_0_15px_rgba(99,102,241,0.2)]";
+=======
+    if (s >= 81 || l === "Critical Risk") return "bg-[#F4E2D8] text-[#C86D51] border-[#C86D51] font-bold shadow-xs";
+    if (s >= 61 || l === "High Risk") return "bg-[#F4E2D8] text-[#C86D51] border-[#C86D51]/50 font-bold";
+    if (s >= 41 || l === "Medium Risk") return "bg-[#F5EFEC] text-[#D9822B] border-[#D9822B]/40 font-semibold";
+    if (s >= 21 || l === "Low Risk") return "bg-[#E2E7E2] text-[#7B8C7B] border-[#7B8C7B]/40 font-medium";
+    return "bg-[#E2E7E2] text-[#7B8C7B] border-[#7B8C7B] font-semibold shadow-xs";
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
   };
 
   const getSeverityBadgeClass = (severity) => {
-    if (severity === "Critical" || severity === "High") return "bg-rose-500/20 text-rose-300 font-bold";
-    if (severity === "Medium") return "bg-amber-500/20 text-amber-300 font-semibold";
-    return "bg-white/10 text-[#94A3B8] font-medium";
+    if (severity === "Critical" || severity === "High") return "bg-[#F4E2D8] text-[#C86D51] font-bold";
+    if (severity === "Medium") return "bg-[#F5EFEC] text-[#D9822B] font-semibold";
+    return "bg-[#E5DDD4] text-[#665A54] font-medium";
   };
 
   const getSourceIcon = (source) => {
-    if (source.includes("Google")) return <Globe className="w-3 h-3" />;
-    if (source.includes("VirusTotal")) return <Database className="w-3 h-3" />;
-    if (source.includes("WHOIS") || source.includes("RDAP")) return <ExternalLink className="w-3 h-3" />;
-    if (source.includes("AI") || source.includes("Gemini")) return <Sparkles className="w-3 h-3" />;
-    return <Cpu className="w-3 h-3" />;
+    if (source.includes("Google")) return <Globe className="w-3 h-3 text-[#7B8C7B]" />;
+    if (source.includes("VirusTotal")) return <Database className="w-3 h-3 text-[#C86D51]" />;
+    if (source.includes("WHOIS") || source.includes("RDAP")) return <ExternalLink className="w-3 h-3 text-[#665A54]" />;
+    if (source.includes("AI") || source.includes("Gemini")) return <Sparkles className="w-3 h-3 text-[#C86D51]" />;
+    return <Cpu className="w-3 h-3 text-[#665A54]" />;
   };
 
   return (
@@ -44,23 +52,27 @@ export default function RiskCard({ scan, onReset }) {
       initial={{ opacity: 0, y: 12, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="bg-[#0B111A] border border-white/10 rounded-3xl shadow-2xl overflow-hidden my-6"
+      className="bg-[#FDFBF7] border border-[#E5DDD4] rounded-3xl shadow-md overflow-hidden my-6"
     >
       {/* Header Banner */}
-      <div className="p-6 sm:p-8 border-b border-white/10 bg-[#080C13]/80">
+      <div className="p-6 sm:p-8 border-b border-[#E5DDD4] bg-[#F5EFEC]/70">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           {/* Circular Score Gauge & Verdict */}
           <div className="flex items-center gap-6">
             <div className="relative w-28 h-28 flex items-center justify-center flex-shrink-0">
               <svg className="w-28 h-28 -rotate-90" viewBox="0 0 120 120">
-                <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" strokeWidth="7" className="text-white/10" />
+                <circle cx="60" cy="60" r="50" fill="none" stroke="currentColor" strokeWidth="7" className="text-[#E5DDD4]" />
                 <motion.circle
                   cx="60"
                   cy="60"
                   r="50"
                   fill="none"
                   strokeWidth="7"
+<<<<<<< HEAD
                   stroke={score >= 81 ? "#F43F5E" : score >= 61 ? "#F43F5E" : score >= 41 ? "#F59E0B" : "#6366F1"}
+=======
+                  stroke={score >= 61 ? "#C86D51" : score >= 41 ? "#D9822B" : "#7B8C7B"}
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                   strokeDasharray="314.15"
                   initial={{ strokeDashoffset: 314.15 }}
                   animate={{ strokeDashoffset: 314.15 - (score / 100) * 314.15 }}
@@ -69,26 +81,26 @@ export default function RiskCard({ scan, onReset }) {
                 />
               </svg>
               <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <span className="font-mono text-3xl font-extrabold text-white tracking-tight">{score}</span>
-                <span className="font-mono text-[9px] uppercase tracking-widest text-[#94A3B8]">/ 100</span>
+                <span className="font-sans text-3xl font-extrabold text-[#2B231F] tracking-tight">{score}</span>
+                <span className="font-sans text-[9px] uppercase tracking-widest text-[#665A54]">/ 100</span>
               </div>
             </div>
 
             <div className="space-y-1">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className={`font-mono text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border ${getLevelBadgeClass(level, score)}`}>
+                <span className={`font-sans text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border ${getLevelBadgeClass(level, score)}`}>
                   {level}
                 </span>
                 {confidence !== undefined && confidence !== null && (
-                  <span className="font-mono text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-white/10 bg-[#05070B] text-[#94A3B8] font-semibold">
+                  <span className="font-sans text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full border border-[#E5DDD4] bg-[#FDFBF7] text-[#665A54] font-semibold">
                     {Math.round(confidence * 100)}% Confidence
                   </span>
                 )}
               </div>
-              <h2 className="font-display font-bold text-2xl tracking-tight text-white">
+              <h2 className="font-display font-bold text-2xl tracking-tight text-[#2B231F]">
                 {score >= 61 ? "High Risk Scam Detected" : score >= 41 ? "Suspicious Activity Flagged" : "Verified Low Risk Profile"}
               </h2>
-              <p className="text-[13px] text-[#94A3B8] leading-relaxed max-w-md">
+              <p className="text-[13px] text-[#665A54] leading-relaxed max-w-md">
                 Calculated from multi-signal analysis combining rule-based detection, AI inspection, and external threat intelligence.
               </p>
             </div>
@@ -110,14 +122,22 @@ export default function RiskCard({ scan, onReset }) {
             {onReset && (
               <button
                 onClick={onReset}
+<<<<<<< HEAD
                 className="font-mono text-[11px] uppercase tracking-widest bg-[#05070B] border border-white/10 text-white px-3.5 py-2.5 rounded-xl hover:border-white/20 transition-all cursor-pointer font-medium"
+=======
+                className="font-sans text-xs uppercase tracking-widest bg-[#FDFBF7] border border-[#E5DDD4] text-[#2B231F] px-4 py-2.5 rounded-xl hover:bg-[#E5DDD4]/30 transition-all cursor-pointer font-medium"
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
               >
                 Analyze Another
               </button>
             )}
             <button
               onClick={() => navigate("/dashboard")}
+<<<<<<< HEAD
               className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-4 py-2.5 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+=======
+              className="font-sans text-xs uppercase tracking-widest bg-[#C86D51] hover:bg-[#B3583C] text-white px-5 py-2.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
             >
               Dashboard <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
@@ -127,11 +147,11 @@ export default function RiskCard({ scan, onReset }) {
         {/* Analysis Sources Badges */}
         {sources.length > 0 && (
           <div className="mt-5 flex items-center gap-2 flex-wrap">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-bold">Analysis Sources:</span>
+            <span className="font-sans text-[9px] uppercase tracking-wider text-[#665A54] font-bold">Analysis Sources:</span>
             {sources.map((source, i) => (
               <span
                 key={i}
-                className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-md border border-white/10 bg-[#05070B] text-white/70 font-medium flex items-center gap-1.5"
+                className="font-sans text-[9px] uppercase tracking-wider px-2.5 py-1 rounded-md border border-[#E5DDD4] bg-[#FDFBF7] text-[#2B231F] font-medium flex items-center gap-1.5"
               >
                 {getSourceIcon(source)} {source}
               </span>
@@ -142,12 +162,21 @@ export default function RiskCard({ scan, onReset }) {
 
       {/* AI Explanation Banner */}
       {explanation && (
+<<<<<<< HEAD
         <div className="px-6 sm:px-8 py-5 border-b border-white/10 bg-[#080C13]/40 flex items-start gap-3.5">
           <div className="p-2 rounded-xl bg-[#05070B] border border-white/10 flex-shrink-0 mt-0.5">
             <Sparkles className="w-4 h-4 text-indigo-400" />
           </div>
           <div className="text-[13.5px] leading-relaxed text-white">
             <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 block mb-1 font-bold">
+=======
+        <div className="px-6 sm:px-8 py-5 border-b border-[#E5DDD4] bg-[#F4E2D8]/40 flex items-start gap-3.5">
+          <div className="p-2 rounded-xl bg-[#FDFBF7] border border-[#E5DDD4] flex-shrink-0 mt-0.5">
+            <Sparkles className="w-4 h-4 text-[#C86D51]" />
+          </div>
+          <div className="text-[13.5px] leading-relaxed text-[#2B231F]">
+            <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] block mb-1 font-bold">
+>>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
               ScamShield AI Explanation Summary
             </span>
             {explanation}
