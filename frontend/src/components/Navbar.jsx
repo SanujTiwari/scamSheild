@@ -245,7 +245,7 @@ function Navbar() {
             <div className="pt-2 border-t border-white/10">
               <button
                 onClick={() => { setShowMobileMenu(false); navigate('/auth'); }}
-                className="w-full bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] font-mono text-[11px] uppercase tracking-widest py-2.5 rounded-xl font-bold text-center"
+                className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-mono text-[11px] uppercase tracking-widest py-2.5 rounded-xl font-bold text-center"
               >
                 Get Started &rarr;
               </button>

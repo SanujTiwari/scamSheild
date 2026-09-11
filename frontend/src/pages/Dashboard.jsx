@@ -154,8 +154,8 @@ function Dashboard() {
   const getScanTypeIcon = (type) => {
     if (type === "message") return <MessageSquare className="w-4 h-4 text-[#00D9FF]" />;
     if (type === "payment") return <CreditCard className="w-4 h-4 text-amber-400" />;
-    if (type === "recruiter") return <UserCheck className="w-4 h-4 text-[#7C5CFC]" />;
-    if (type === "url") return <Globe className="w-4 h-4 text-[#00F5A0]" />;
+    if (type === "recruiter") return <UserCheck className="w-4 h-4 text-violet-400" />;
+    if (type === "url") return <Globe className="w-4 h-4 text-indigo-400" />;
     return <Briefcase className="w-4 h-4 text-white" />;
   };
 
@@ -172,14 +172,14 @@ function Dashboard() {
   if (isLoading) return <LoadingSpinner message="Loading Fraud Intelligence Console..." />;
 
   return (
-    <div className="min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-[#00F5A0] selection:text-[#05070B]">
+    <div className="min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-indigo-500 selection:text-white">
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div>
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#00F5A0] font-bold">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 font-bold">
               AI Fraud Intelligence Unit
             </span>
             <h1 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-white mt-1">
@@ -199,7 +199,7 @@ function Dashboard() {
             </button>
             <button
               onClick={() => navigate("/scanner")}
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] px-5 py-2.5 rounded-xl hover:shadow-[0_0_20px_rgba(0,245,160,0.3)] transition-all flex items-center gap-1.5 cursor-pointer font-bold shadow-xs"
+              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-2.5 rounded-xl hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all flex items-center gap-1.5 cursor-pointer font-bold shadow-xs"
             >
               <Plus className="w-4 h-4" /> Execute Scan
             </button>
@@ -254,14 +254,14 @@ function Dashboard() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
-            className="p-5 rounded-2xl border border-[#00F5A0]/30 bg-[#00F5A0]/10 space-y-2 shadow-xl"
+            className="p-5 rounded-2xl border border-indigo-500/30 bg-indigo-500/10 space-y-2 shadow-xl"
           >
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-[#00F5A0] font-extrabold">Verified / Safe</span>
-              <CheckCircle className="w-4 h-4 text-[#00F5A0]" />
+              <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 font-extrabold">Verified / Safe</span>
+              <CheckCircle className="w-4 h-4 text-indigo-400" />
             </div>
-            <p className="font-mono text-3xl font-extrabold text-[#00F5A0]">{stats.safeLow}</p>
-            <p className="text-[12px] text-[#00F5A0] font-medium">Minimal threat profiles</p>
+            <p className="font-mono text-3xl font-extrabold text-indigo-400">{stats.safeLow}</p>
+            <p className="text-[12px] text-indigo-300 font-medium">Minimal threat profiles</p>
           </motion.div>
         </div>
 
@@ -285,7 +285,7 @@ function Dashboard() {
                     <Icon className="w-4 h-4 text-[#94A3B8]" />
                     <span className="font-display text-[13px] font-medium text-white">{item.label}</span>
                   </div>
-                  <span className="font-mono text-[13px] font-bold text-[#00F5A0]">{item.count}</span>
+                  <span className="font-mono text-[13px] font-bold text-indigo-400">{item.count}</span>
                 </div>
               );
             })}
@@ -301,7 +301,7 @@ function Dashboard() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search case files by keyword, title, sender, or entity..."
-              className="w-full pl-10 pr-4 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none"
+              className="w-full pl-10 pr-4 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 text-white outline-none"
             />
           </div>
 
@@ -381,7 +381,7 @@ function Dashboard() {
                         score >= 81 ? "border-rose-500/40 bg-rose-500/10 text-rose-400 font-bold" :
                         score >= 61 ? "border-rose-500/30 bg-rose-500/10 text-rose-400 font-bold" :
                         score >= 41 ? "border-amber-500/30 bg-amber-500/10 text-amber-400 font-semibold" :
-                        "border-[#00F5A0]/30 bg-[#00F5A0]/10 text-[#00F5A0] font-semibold"
+                        "border-indigo-500/30 bg-indigo-500/10 text-indigo-400 font-semibold"
                       }`}>
                         {level}
                       </span>
@@ -424,7 +424,7 @@ function Dashboard() {
             </p>
             <button
               onClick={() => navigate("/scanner")}
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] px-5 py-2.5 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer mt-2 font-bold"
+              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-2.5 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer mt-2 font-bold"
             >
               Start New Scan
             </button>

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield,
   ArrowRight,
@@ -16,6 +16,9 @@ import {
   CreditCard,
   UserCheck,
   ShieldCheck,
+  ShieldAlert,
+  Lock,
+  Unlock,
   Activity,
   Cpu,
   Layers,
@@ -27,105 +30,153 @@ import Navbar from "../components/Navbar";
 import ScannerForm from "../components/ScannerForm";
 import RiskCard from "../components/RiskCard";
 
-/* Layered Sophisticated AI Scam Detection Core Visual */
-function AIScamDetectionCoreVisual() {
+/* Sleek Authentic Live Security Telemetry Console Preview */
+function LiveSecurityConsoleVisual() {
+  const [activeTab, setActiveTab] = useState("telemetry");
+
+  const demoScans = [
+    {
+      title: "Remote Data Specialist — Wire Deposit Fee Required",
+      type: "Job Posting",
+      score: 92,
+      time: "Just now",
+      signals: ["Refundable equipment fee demanded via Zelle", "Domain registered 3 days ago", "Recruiter email domain mismatch"],
+      status: "Threat Blocked",
+    },
+    {
+      title: "Google Senior Tech Lead Opportunity",
+      type: "LinkedIn Offer",
+      score: 12,
+      time: "3 mins ago",
+      signals: ["Official google.com hiring portal", "Verified corporate email header", "Standard interview process"],
+      status: "Cleared Safe",
+    },
+    {
+      title: "URGENT: Unpaid Customs Fee $2.99",
+      type: "SMS Phishing",
+      score: 98,
+      time: "7 mins ago",
+      signals: ["Known spoofed postal tracking gateway", "High-urgency click deadline", "Blacklisted IP subnet"],
+      status: "Threat Blocked",
+    },
+  ];
+
   return (
-    <div className="relative w-full max-w-lg xl:max-w-xl aspect-square flex items-center justify-center mx-auto my-4 select-none">
-      {/* 1. BACKGROUND LAYER: Large Ambient Soft Glow */}
-      <div className="absolute inset-0 bg-radial from-indigo-600/20 via-violet-600/10 to-transparent blur-[80px] pointer-events-none opacity-80" />
+    <div className="relative w-full max-w-lg mx-auto rounded-2xl bg-[#0B111A] border border-white/10 shadow-2xl overflow-hidden select-none">
+      {/* App Window Top Header */}
+      <div className="bg-[#080C13] border-b border-white/10 px-4 py-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+            <span className="w-2.5 h-2.5 rounded-full bg-indigo-500/80" />
+          </div>
+          <span className="font-mono text-[10.5px] text-[#94A3B8] ml-2 flex items-center gap-1.5">
+            <Lock className="w-3 h-3 text-indigo-400" /> scamshield.ai/live-console
+          </span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
+          <span className="font-mono text-[9.5px] text-indigo-400 uppercase tracking-wider font-bold">
+            Live Engine Active
+          </span>
+        </div>
+      </div>
 
-      {/* 2. MID LAYER: Concentric Rings & Radial Grid */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 45, repeat: Infinity, ease: "linear" }}
-        className="absolute inset-2 rounded-full border border-dashed border-white/10 pointer-events-none"
-      />
+      {/* Tabs Bar */}
+      <div className="flex border-b border-white/10 bg-[#080C13]/60 px-3 pt-2 gap-2 font-mono text-[10px] uppercase tracking-wider">
+        <button
+          type="button"
+          onClick={() => setActiveTab("telemetry")}
+          className={`px-3 py-1.5 rounded-t-lg transition-all cursor-pointer font-semibold ${
+            activeTab === "telemetry"
+              ? "bg-[#0B111A] border-t border-x border-white/10 text-white"
+              : "text-[#94A3B8] hover:text-white"
+          }`}
+        >
+          Live Telemetry
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("intel")}
+          className={`px-3 py-1.5 rounded-t-lg transition-all cursor-pointer font-semibold ${
+            activeTab === "intel"
+              ? "bg-[#0B111A] border-t border-x border-white/10 text-white"
+              : "text-[#94A3B8] hover:text-white"
+          }`}
+        >
+          Domain Intel
+        </button>
+      </div>
 
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-        className="absolute inset-12 rounded-full border border-white/[0.08] pointer-events-none"
-      >
-        <div className="absolute -top-1 left-1/2 w-2.5 h-2.5 rounded-full bg-indigo-500 shadow-[0_0_12px_#6366f1]" />
-        <div className="absolute -bottom-1 right-1/4 w-2.5 h-2.5 rounded-full bg-violet-500 shadow-[0_0_12px_#8b5cf6]" />
-      </motion.div>
+      {/* Console Content */}
+      <div className="p-5 space-y-4">
+        {/* Featured Live Threat Alert */}
+        <div className="p-4 rounded-xl border border-rose-500/30 bg-rose-950/20 space-y-3 shadow-lg">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-rose-500/20 text-rose-300 font-bold border border-rose-500/30 flex items-center gap-1">
+                <ShieldAlert className="w-3 h-3 text-rose-400" /> Threat Intercepted
+              </span>
+              <span className="font-mono text-[10px] text-[#94A3B8]">{demoScans[0].time}</span>
+            </div>
+            <span className="font-mono text-[11px] font-extrabold text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-md border border-rose-500/20">
+              Risk: {demoScans[0].score}/100
+            </span>
+          </div>
 
-      {/* Inner scanning wave pulse */}
-      <motion.div
-        animate={{ scale: [0.85, 1.12, 0.85], opacity: [0.2, 0.5, 0.2] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute inset-24 rounded-full bg-gradient-to-tr from-indigo-500/10 via-violet-500/5 to-transparent border border-indigo-500/20 pointer-events-none"
-      />
+          <div>
+            <h4 className="font-display font-semibold text-[14px] text-white">
+              {demoScans[0].title}
+            </h4>
+            <p className="font-mono text-[10px] text-[#94A3B8] mt-0.5">
+              Category: {demoScans[0].type} • Status: {demoScans[0].status}
+            </p>
+          </div>
 
-      {/* 3. MAIN LAYER: AI Detection Core */}
-      <motion.div
-        animate={{ scale: [0.98, 1.03, 0.98] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="relative z-10 w-36 h-36 sm:w-40 sm:h-40 rounded-3xl bg-[#0B111A]/90 backdrop-blur-xl border border-indigo-500/40 shadow-[0_0_50px_rgba(99,102,241,0.25)] flex flex-col items-center justify-center gap-2.5 group cursor-pointer"
-      >
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-500 to-violet-500 p-[1px] shadow-[0_0_20px_rgba(99,102,241,0.4)]">
-          <div className="w-full h-full bg-[#05070B] rounded-[15px] flex items-center justify-center">
-            <Shield className="w-7 h-7 text-indigo-400" strokeWidth={2} />
+          <div className="space-y-1.5 pt-2 border-t border-rose-500/20">
+            <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-bold block">
+              Flagged Risk Signals:
+            </span>
+            {demoScans[0].signals.map((sig, i) => (
+              <div key={i} className="flex items-center gap-2 font-mono text-[11px] text-rose-200">
+                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 flex-shrink-0" />
+                <span>{sig}</span>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="text-center space-y-0.5">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 font-bold block">
-            AI CORE ENGINE
+
+        {/* Live Stream List */}
+        <div className="space-y-2">
+          <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-bold block">
+            Real-Time Analysis Feed:
           </span>
-          <span className="font-mono text-[9px] text-[#94A3B8] block">Multi-Signal Active</span>
+          {demoScans.slice(1).map((item, idx) => (
+            <div
+              key={idx}
+              className="p-3 rounded-xl border border-white/10 bg-[#080C13] flex items-center justify-between text-xs hover:border-white/20 transition-colors"
+            >
+              <div className="flex items-center gap-2.5">
+                <div className={`w-2 h-2 rounded-full ${item.score > 50 ? "bg-rose-400" : "bg-indigo-400"}`} />
+                <div>
+                  <p className="font-display font-medium text-white text-[12.5px] truncate max-w-[200px] sm:max-w-[240px]">
+                    {item.title}
+                  </p>
+                  <p className="font-mono text-[9.5px] text-[#94A3B8]">{item.type} • {item.time}</p>
+                </div>
+              </div>
+              <span className={`font-mono text-[9.5px] uppercase font-bold px-2 py-0.5 rounded-md ${
+                item.score > 50
+                  ? "bg-rose-500/10 text-rose-400 border border-rose-500/20"
+                  : "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+              }`}>
+                {item.status}
+              </span>
+            </div>
+          ))}
         </div>
-      </motion.div>
-
-      {/* 4. FOREGROUND LAYER: Integrated Signal Panels */}
-      <motion.div
-        animate={{ y: [-5, 5, -5] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-4 left-0 z-20 px-3.5 py-2 rounded-xl bg-[#0B111A]/90 border border-white/10 shadow-2xl backdrop-blur-md flex items-center gap-2.5"
-      >
-        <div className="w-2 h-2 rounded-full bg-indigo-500 animate-ping" />
-        <div className="flex flex-col">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#94A3B8]">AI Analysis</span>
-          <span className="font-mono text-[11px] font-bold text-white">Scanning Patterns...</span>
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [5, -5, 5] }}
-        transition={{ duration: 4.8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-12 -right-2 z-20 px-3.5 py-2.5 rounded-xl bg-[#0B111A]/90 border border-rose-500/30 shadow-2xl backdrop-blur-md flex items-center gap-2.5"
-      >
-        <AlertTriangle className="w-4 h-4 text-rose-400" />
-        <div className="flex flex-col">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#94A3B8]">Threat Signal</span>
-          <span className="font-mono text-[11px] font-bold text-rose-400">Suspicious Urgency</span>
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [-7, 7, -7] }}
-        transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-6 right-2 z-20 px-4 py-2.5 rounded-xl bg-[#0B111A]/90 border border-violet-500/30 shadow-2xl backdrop-blur-md flex items-center gap-3"
-      >
-        <div className="w-8 h-8 rounded-lg bg-[#05070B] border border-violet-500/30 flex items-center justify-center font-mono text-xs font-bold text-violet-400">
-          82
-        </div>
-        <div className="flex flex-col">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#94A3B8]">Risk Score</span>
-          <span className="font-mono text-[11px] font-bold text-violet-400">High Risk Flag</span>
-        </div>
-      </motion.div>
-
-      <motion.div
-        animate={{ y: [6, -6, 6] }}
-        transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-4 -left-2 z-20 px-3.5 py-2 rounded-xl bg-[#0B111A]/90 border border-indigo-500/30 shadow-2xl backdrop-blur-md flex items-center gap-2.5"
-      >
-        <ShieldCheck className="w-4 h-4 text-indigo-400" />
-        <div className="flex flex-col">
-          <span className="font-mono text-[9px] uppercase tracking-widest text-[#94A3B8]">Domain Check</span>
-          <span className="font-mono text-[11px] font-bold text-indigo-400">Verified Safe</span>
-        </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -219,14 +270,14 @@ export default function Landing() {
             </motion.div>
           </div>
 
-          {/* Right Visual Core Column */}
+          {/* Right Visual Column (Live Security Telemetry Console) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.45, delay: 0.15 }}
             className="lg:col-span-5"
           >
-            <AIScamDetectionCoreVisual />
+            <LiveSecurityConsoleVisual />
           </motion.div>
         </section>
 

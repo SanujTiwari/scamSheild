@@ -1,0 +1,184 @@
+.container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9998;
+}
+
+.triggerBtn {
+  background: #c8ff00;
+  color: #0d0e12;
+  border: none;
+  font-family: monospace;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 14px 20px;
+  border-radius: 30px;
+  box-shadow: 0 10px 25px rgba(200, 255, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.triggerBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(200, 255, 0, 0.4);
+}
+
+.chatWindow {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  width: 360px;
+  height: 480px;
+  background: #0b111a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .chatWindow {
+    width: calc(100vw - 32px);
+    right: -8px;
+  }
+}
+
+.chatHeader {
+  padding: 14px 18px;
+  background: #080c13;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.botTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pulseDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c8ff00;
+  box-shadow: 0 0 8px #c8ff00;
+}
+
+.botName {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.botSub {
+  font-family: monospace;
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.chatBody {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.botBubble {
+  align-self: flex-start;
+  background: #080c13;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  font-size: 13px;
+  line-height: 1.4;
+  max-width: 85%;
+}
+
+.userBubble {
+  align-self: flex-end;
+  background: rgba(200, 255, 0, 0.15);
+  border: 1px solid rgba(200, 255, 0, 0.3);
+  color: #c8ff00;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border-bottom-right-radius: 4px;
+  font-size: 13px;
+  max-width: 85%;
+}
+
+.quickPrompts {
+  padding: 8px 12px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.quickPrompts button {
+  background: #080c13;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
+  font-size: 10px;
+  font-family: monospace;
+  padding: 4px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.quickPrompts button:hover {
+  border-color: #c8ff00;
+  color: #ffffff;
+}
+
+.chatInputRow {
+  padding: 12px;
+  background: #080c13;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 8px;
+}
+
+.chatInput {
+  flex: 1;
+  background: #0b111a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: #ffffff;
+  font-size: 13px;
+  outline: none;
+}
+
+.sendBtn {
+  background: #c8ff00;
+  color: #0d0e12;
+  border: none;
+  font-family: monospace;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}

@@ -51,8 +51,8 @@ export default function Auth() {
     if (/[^A-Za-z0-9]/.test(pw)) score++;
 
     if (score <= 2) return { level: "medium", label: "Medium", hint: "Add uppercase or numbers", percent: 55, color: "text-amber-400" };
-    if (score <= 3) return { level: "good", label: "Good", hint: "Strong combination", percent: 75, color: "text-cyan-400" };
-    return { level: "strong", label: "Strong", hint: "Excellent password!", percent: 100, color: "text-[#00F5A0]" };
+    if (score <= 3) return { level: "good", label: "Good", hint: "Strong combination", percent: 75, color: "text-violet-400" };
+    return { level: "strong", label: "Strong", hint: "Excellent password!", percent: 100, color: "text-indigo-400" };
   }, [formData.password]);
 
   const handleSubmit = async (e) => {
@@ -105,10 +105,10 @@ export default function Auth() {
   });
 
   return (
-    <div className="min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-[#00F5A0] selection:text-[#05070B] font-sans flex flex-col justify-between overflow-x-hidden">
+    <div className="min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-indigo-500 selection:text-white font-sans flex flex-col justify-between overflow-x-hidden">
       {/* Ambient Background Aura */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-radial from-[#00F5A0]/10 via-[#00D9FF]/5 to-transparent blur-[120px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[500px] bg-radial from-indigo-600/15 via-violet-600/5 to-transparent blur-[120px]" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:36px_36px] opacity-30" />
       </div>
 
@@ -124,9 +124,9 @@ export default function Auth() {
               
               {/* Header Badge & Title */}
               <div className="space-y-3">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#00F5A0]/30 bg-[#080C13]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#00F5A0] animate-pulse" />
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-[#00F5A0] font-bold">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-[#080C13]">
+                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 font-bold">
                     AUTHENTICATION PORTAL // CLEARANCE
                   </span>
                 </div>
@@ -142,7 +142,7 @@ export default function Auth() {
                       <button
                         type="button"
                         onClick={() => setIsLoginState(false)}
-                        className="font-mono text-[12px] uppercase font-bold text-[#00F5A0] hover:text-[#00D9FF] hover:underline cursor-pointer transition-colors"
+                        className="font-mono text-[12px] uppercase font-bold text-indigo-400 hover:text-indigo-300 hover:underline cursor-pointer transition-colors"
                       >
                         Sign up free &rarr;
                       </button>
@@ -153,7 +153,7 @@ export default function Auth() {
                       <button
                         type="button"
                         onClick={() => setIsLoginState(true)}
-                        className="font-mono text-[12px] uppercase font-bold text-[#00F5A0] hover:text-[#00D9FF] hover:underline cursor-pointer transition-colors"
+                        className="font-mono text-[12px] uppercase font-bold text-indigo-400 hover:text-indigo-300 hover:underline cursor-pointer transition-colors"
                       >
                         Sign in &rarr;
                       </button>
@@ -174,7 +174,7 @@ export default function Auth() {
                       transition={{ duration: 0.2 }}
                       className="space-y-1.5"
                     >
-                      <label className="font-mono text-[10.5px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                      <label className="font-mono text-[10.5px] uppercase tracking-wider text-indigo-400 font-bold">
                         Full Name *
                       </label>
                       <div className="relative">
@@ -185,7 +185,7 @@ export default function Auth() {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Alex Morgan"
-                          className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] focus:ring-1 focus:ring-[#00F5A0] text-white outline-none transition-all placeholder-[#94A3B8]/40"
+                          className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all placeholder-[#94A3B8]/40"
                         />
                       </div>
                     </motion.div>
@@ -193,7 +193,7 @@ export default function Auth() {
                 </AnimatePresence>
 
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[10.5px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                  <label className="font-mono text-[10.5px] uppercase tracking-wider text-indigo-400 font-bold">
                     Email Address *
                   </label>
                   <div className="relative">
@@ -204,14 +204,14 @@ export default function Auth() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="you@domain.com"
-                      className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] focus:ring-1 focus:ring-[#00F5A0] text-white outline-none transition-all placeholder-[#94A3B8]/40"
+                      className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all placeholder-[#94A3B8]/40"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <label className="font-mono text-[10.5px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                    <label className="font-mono text-[10.5px] uppercase tracking-wider text-indigo-400 font-bold">
                       Password *
                     </label>
                     {isLoginState && (
@@ -232,7 +232,7 @@ export default function Auth() {
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       placeholder="••••••••"
-                      className="w-full pl-10 pr-10 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] focus:ring-1 focus:ring-[#00F5A0] text-white outline-none transition-all placeholder-[#94A3B8]/40"
+                      className="w-full pl-10 pr-10 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all placeholder-[#94A3B8]/40"
                     />
                     <button
                       type="button"
@@ -251,7 +251,7 @@ export default function Auth() {
                       </div>
                       <div className="w-full h-1 bg-[#080C13] rounded-full overflow-hidden border border-white/5">
                         <div
-                          className="h-full bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] transition-all duration-300"
+                          className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-all duration-300"
                           style={{ width: `${passwordStrength.percent}%` }}
                         />
                       </div>
@@ -263,11 +263,11 @@ export default function Auth() {
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full font-mono text-[11.5px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] font-bold py-3.5 rounded-xl hover:shadow-[0_0_25px_rgba(0,245,160,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 active:scale-[0.99]"
+                    className="w-full font-mono text-[11.5px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white font-bold py-3.5 rounded-xl hover:shadow-[0_0_25px_rgba(99,102,241,0.4)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 active:scale-[0.99]"
                   >
                     {isLoading ? (
                       <>
-                        <div className="w-4 h-4 border-2 border-[#05070B] border-t-transparent rounded-full animate-spin" />
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         Verifying Credentials...
                       </>
                     ) : (
@@ -315,13 +315,12 @@ export default function Auth() {
 
             {/* Right Column: Premium Showcase Panel */}
             <div className="lg:col-span-5 bg-[#080C13] border-t lg:border-t-0 lg:border-l border-white/10 p-8 sm:p-12 flex flex-col justify-between relative overflow-hidden">
-              {/* Radial Glow */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-radial from-[#00F5A0]/15 via-[#00D9FF]/10 to-transparent blur-3xl pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-radial from-indigo-600/15 via-violet-600/10 to-transparent blur-3xl pointer-events-none" />
 
               <div className="space-y-6 relative z-10">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-[#05070B]">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#00F5A0]" />
-                  <span className="font-mono text-[9.5px] uppercase tracking-widest text-[#00D9FF] font-bold">
+                  <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
+                  <span className="font-mono text-[9.5px] uppercase tracking-widest text-indigo-300 font-bold">
                     MULTI-TYPE SCAM DEFENSE
                   </span>
                 </div>
@@ -341,7 +340,7 @@ export default function Auth() {
                     "256-Bit SSL Encrypted Session Data",
                   ].map((item, idx) => (
                     <div key={idx} className="flex items-center gap-3 p-3.5 rounded-xl border border-white/10 bg-[#0B111A]/80 shadow-md">
-                      <CheckCircle2 className="w-4 h-4 text-[#00F5A0] flex-shrink-0" />
+                      <CheckCircle2 className="w-4 h-4 text-indigo-400 flex-shrink-0" />
                       <span className="font-mono text-[11.5px] text-[#F8FAFC] tracking-wide font-medium">{item}</span>
                     </div>
                   ))}
@@ -350,7 +349,7 @@ export default function Auth() {
 
               <div className="pt-8 border-t border-white/10 font-mono text-[10.5px] text-[#94A3B8] flex items-center justify-between relative z-10 uppercase tracking-widest">
                 <span className="flex items-center gap-1.5">
-                  <Lock className="w-3 h-3 text-[#00F5A0]" /> ScamShield v2.5
+                  <Lock className="w-3 h-3 text-indigo-400" /> ScamShield v2.5
                 </span>
                 <span>256-Bit SSL</span>
               </div>

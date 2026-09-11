@@ -87,7 +87,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
       if (onSubmit) {
         onSubmit(activeTab, res);
       }
-      toast.success("Analysis Complete!");
+      toast.success("Threat Audit Complete!");
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to complete scan. Please try again.");
     } finally {
@@ -119,6 +119,8 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
       setMessageForm((prev) => ({ ...prev, message: sampleText }));
     } else if (mode === "payment") {
       setPaymentForm((prev) => ({ ...prev, requestText: sampleText, amount: "$89" }));
+    } else if (mode === "url") {
+      setUrlForm({ url: sampleText });
     }
   };
 
@@ -143,12 +145,12 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
               {isActive && (
                 <motion.div
                   layoutId="activeScannerTab"
-                  className="absolute inset-0 rounded-xl bg-[#0B111A] border border-[#00F5A0]/40 shadow-[0_0_15px_rgba(0,245,160,0.15)]"
+                  className="absolute inset-0 rounded-xl bg-[#0B111A] border border-indigo-500/50 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               <div className="relative z-10 flex items-center gap-2 mb-1">
-                <Icon className={`w-4 h-4 ${isActive ? "text-[#00F5A0]" : "text-[#94A3B8]"}`} />
+                <Icon className={`w-4 h-4 ${isActive ? "text-indigo-400" : "text-[#94A3B8]"}`} />
                 <span className="font-display font-semibold text-[13px] tracking-tight">
                   {tab.label}
                 </span>
@@ -162,22 +164,27 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
       </div>
 
       {/* Quick Sample Autofill Chips */}
-      <div className="px-6 pt-5 flex items-center gap-2 overflow-x-auto">
-        <span className="font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] flex items-center gap-1 font-bold flex-shrink-0">
-          <Sparkles className="w-3 h-3 text-[#00F5A0]" /> Sample Scenarios:
+      <div className="px-6 pt-5 flex items-center gap-2 overflow-x-auto pb-1">
+        <span className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 flex items-center gap-1 font-bold flex-shrink-0 bg-indigo-500/10 px-2.5 py-1 rounded-md border border-indigo-500/20">
+          <Sparkles className="w-3.5 h-3.5 text-indigo-400 animate-pulse" /> Try Samples:
         </span>
         {[
           { label: "Suspicious Job Offer", mode: "job", text: "Earn up to $4,200/week working from home. A refundable training fee of $89 is required via Zelle before equipment dispatch." },
           { label: "Fake Delivery Message", mode: "message", text: "URGENT: Your package is held due to unpaid fee $2.99. Click here to confirm payment immediately: verify-pkg-track.info" },
-          { label: "Investment Offer", mode: "message", text: "Guaranteed 300% daily returns on crypto trading. Contact account manager on Telegram @crypto_wealth_exec." },
-          { label: "Urgent Payment Request", mode: "payment", text: "Required onboarding fee of $89 for laptop shipment deposit." },
+          { label: "Investment Scam", mode: "message", text: "Guaranteed 300% daily returns on crypto trading. Contact account manager on Telegram @crypto_wealth_exec." },
+          { label: "Urgent Payment Deposit", mode: "payment", text: "Required onboarding fee of $89 for laptop shipment deposit." },
+          { label: "Phishing Link", mode: "url", text: "https://verify-account-security-update.xyz" },
         ].map((chip, idx) => (
           <button
             key={idx}
             type="button"
-            onClick={() => handleAutofillChip(chip.text, chip.mode)}
-            className="px-3 py-1 rounded-full border border-white/10 bg-[#080C13] hover:border-[#00F5A0]/50 font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] hover:text-white transition-all cursor-pointer whitespace-nowrap"
+            onClick={() => {
+              handleAutofillChip(chip.text, chip.mode);
+              toast.success(`Loaded sample: ${chip.label}`);
+            }}
+            className="px-3.5 py-1.5 rounded-full border border-white/10 bg-[#080C13] hover:border-indigo-500/60 hover:bg-indigo-500/10 font-mono text-[10px] uppercase tracking-wider text-[#94A3B8] hover:text-white transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 group active:scale-95 shadow-xs"
           >
+            <Zap className="w-3 h-3 text-indigo-400 opacity-60 group-hover:opacity-100 transition-opacity" />
             {chip.label}
           </button>
         ))}
@@ -197,7 +204,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                  <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
                     Job Title *
                   </label>
                   <div className="relative">
@@ -208,13 +215,13 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                       value={jobForm.title}
                       onChange={(e) => setJobForm({ ...jobForm, title: e.target.value })}
                       placeholder="e.g. Remote Data Entry Specialist"
-                      className="w-full pl-10 pr-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none transition-colors"
+                      className="w-full pl-10 pr-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                  <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
                     Company Name *
                   </label>
                   <div className="relative">
@@ -225,23 +232,28 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                       value={jobForm.companyName}
                       onChange={(e) => setJobForm({ ...jobForm, companyName: e.target.value })}
                       placeholder="e.g. Tech Global Inc."
-                      className="w-full pl-10 pr-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none transition-colors"
+                      className="w-full pl-10 pr-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                     />
                   </div>
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
-                  Job Description & Offer Content *
-                </label>
+                <div className="flex items-center justify-between">
+                  <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
+                    Job Description & Offer Content *
+                  </label>
+                  <span className="font-mono text-[10px] text-[#94A3B8]">
+                    {jobForm.description.length} chars
+                  </span>
+                </div>
                 <textarea
                   required
                   rows="6"
                   value={jobForm.description}
                   onChange={(e) => setJobForm({ ...jobForm, description: e.target.value })}
                   placeholder="Paste the full job posting description text here..."
-                  className="w-full p-4 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none transition-colors resize-y leading-relaxed font-normal"
+                  className="w-full p-4 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all resize-y leading-relaxed font-normal"
                 />
               </div>
 
@@ -253,7 +265,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={jobForm.salary}
                     onChange={(e) => setJobForm({ ...jobForm, salary: e.target.value })}
                     placeholder="e.g. $4,000/week"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -263,7 +275,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={jobForm.email}
                     onChange={(e) => setJobForm({ ...jobForm, email: e.target.value })}
                     placeholder="e.g. hr-tech@gmail.com"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -273,7 +285,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={jobForm.website}
                     onChange={(e) => setJobForm({ ...jobForm, website: e.target.value })}
                     placeholder="e.g. techglobal.com"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -290,16 +302,21 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
               className="space-y-5"
             >
               <div className="space-y-1.5">
-                <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
-                  Message Content *
-                </label>
+                <div className="flex items-center justify-between">
+                  <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
+                    Message Content *
+                  </label>
+                  <span className="font-mono text-[10px] text-[#94A3B8]">
+                    {messageForm.message.length} chars
+                  </span>
+                </div>
                 <textarea
                   required
                   rows="6"
                   value={messageForm.message}
                   onChange={(e) => setMessageForm({ ...messageForm, message: e.target.value })}
                   placeholder="Paste the SMS, WhatsApp, Telegram, or email message text..."
-                  className="w-full p-4 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none transition-colors resize-y leading-relaxed font-normal"
+                  className="w-full p-4 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all resize-y leading-relaxed font-normal"
                 />
               </div>
 
@@ -309,7 +326,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                   <select
                     value={messageForm.platform}
                     onChange={(e) => setMessageForm({ ...messageForm, platform: e.target.value })}
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all cursor-pointer"
                   >
                     <option value="WhatsApp">WhatsApp</option>
                     <option value="Telegram">Telegram</option>
@@ -325,7 +342,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={messageForm.senderEmail}
                     onChange={(e) => setMessageForm({ ...messageForm, senderEmail: e.target.value })}
                     placeholder="e.g. recruiter@gmail.com"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -335,7 +352,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={messageForm.senderPhone}
                     onChange={(e) => setMessageForm({ ...messageForm, senderPhone: e.target.value })}
                     placeholder="e.g. +1 555-0192"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -352,7 +369,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
               className="space-y-5"
             >
               <div className="space-y-1.5">
-                <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
                   Payment Demand Details *
                 </label>
                 <textarea
@@ -361,7 +378,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                   value={paymentForm.requestText}
                   onChange={(e) => setPaymentForm({ ...paymentForm, requestText: e.target.value })}
                   placeholder="Explain what payment is being requested (e.g., registration fee, training charge, laptop deposit)..."
-                  className="w-full p-4 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none transition-colors resize-y leading-relaxed font-normal"
+                  className="w-full p-4 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all resize-y leading-relaxed font-normal"
                 />
               </div>
 
@@ -373,7 +390,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={paymentForm.amount}
                     onChange={(e) => setPaymentForm({ ...paymentForm, amount: e.target.value })}
                     placeholder="e.g. $89 or ₹2,000"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -381,7 +398,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                   <select
                     value={paymentForm.method}
                     onChange={(e) => setPaymentForm({ ...paymentForm, method: e.target.value })}
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all cursor-pointer"
                   >
                     <option value="Bank Transfer">Bank Transfer</option>
                     <option value="UPI / GPay">UPI / GPay</option>
@@ -397,7 +414,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={paymentForm.reason}
                     onChange={(e) => setPaymentForm({ ...paymentForm, reason: e.target.value })}
                     placeholder="e.g. Refundable onboarding kit"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -415,7 +432,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                  <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
                     Recruiter Name *
                   </label>
                   <input
@@ -424,12 +441,12 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={recruiterForm.name}
                     onChange={(e) => setRecruiterForm({ ...recruiterForm, name: e.target.value })}
                     placeholder="e.g. Sarah Jenkins"
-                    className="w-full px-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                  <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
                     Recruiter Email Address *
                   </label>
                   <input
@@ -438,7 +455,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={recruiterForm.email}
                     onChange={(e) => setRecruiterForm({ ...recruiterForm, email: e.target.value })}
                     placeholder="e.g. sarah.hiring@gmail.com"
-                    className="w-full px-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-4 py-2.5 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -451,7 +468,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={recruiterForm.company}
                     onChange={(e) => setRecruiterForm({ ...recruiterForm, company: e.target.value })}
                     placeholder="e.g. Acme Corp"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -461,7 +478,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={recruiterForm.phone}
                     onChange={(e) => setRecruiterForm({ ...recruiterForm, phone: e.target.value })}
                     placeholder="e.g. +1 555-0199"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-1.5">
@@ -471,7 +488,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={recruiterForm.profileUrl}
                     onChange={(e) => setRecruiterForm({ ...recruiterForm, profileUrl: e.target.value })}
                     placeholder="e.g. linkedin.com/in/sarah"
-                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 text-white outline-none"
+                    className="w-full px-3.5 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -488,7 +505,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
               className="space-y-5"
             >
               <div className="space-y-1.5">
-                <label className="font-mono text-[10px] uppercase tracking-wider text-[#00F5A0] font-bold">
+                <label className="font-mono text-[10px] uppercase tracking-wider text-indigo-400 font-bold">
                   Suspicious Link or Website URL *
                 </label>
                 <div className="relative">
@@ -499,7 +516,7 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
                     value={urlForm.url}
                     onChange={(e) => setUrlForm({ ...urlForm, url: e.target.value })}
                     placeholder="https://verify-account-now.xyz"
-                    className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-[#00F5A0] text-white outline-none"
+                    className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -512,16 +529,16 @@ export default function ScannerForm({ onSubmit, isLoading: parentLoading, initia
           <button
             type="submit"
             disabled={isExecuting}
-            className="w-full font-mono text-[12px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] py-4 rounded-xl font-bold hover:shadow-[0_0_25px_rgba(0,245,160,0.4)] transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 active:scale-[0.99]"
+            className="w-full font-mono text-[12px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 via-violet-600 to-indigo-600 text-white py-4 rounded-xl font-bold hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 active:scale-[0.99]"
           >
             {isExecuting ? (
               <>
-                <div className="w-4 h-4 border-2 border-[#05070B] border-t-transparent rounded-full animate-spin" />
-                Analyzing with ScamShield...
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                Running Fraud Audit...
               </>
             ) : (
               <>
-                Analyze with ScamShield <Send className="w-4 h-4" />
+                Run Fraud Audit <Send className="w-4 h-4" />
               </>
             )}
           </button>

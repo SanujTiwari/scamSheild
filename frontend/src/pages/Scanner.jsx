@@ -14,28 +14,30 @@ export default function Scanner() {
   const initialScanText = location.state?.initialScan || "";
 
   const handleScanSubmit = (scanType, response) => {
-    // ScannerForm already called the API — we just receive the response here
     if (response && response.scan) {
       setScanResult(response.scan);
     }
   };
 
   return (
-    <div className="js-root min-h-screen bg-[var(--paper)]">
+    <div className="js-root min-h-screen bg-[#05070B] text-[#F8FAFC]">
       {isLoading && <LoadingSpinner message="ScamShield AI is analyzing evidence against threat database..." />}
       <Navbar />
 
       <main className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
         {/* Page Title Header */}
-        <div className="max-w-2xl mb-8 space-y-2">
-          <span className="font-mono text-[10px] uppercase tracking-widest border border-[var(--line)] px-2.5 py-1 text-[var(--ink-dim)]">
-            Evidence Intake Engine
-          </span>
-          <h1 className="font-display font-semibold text-3xl sm:text-4xl tracking-tight text-[var(--ink)]">
-            Multi-Type Scam Scanner
+        <div className="max-w-2xl mb-8 space-y-3">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-widest bg-indigo-500/10 border border-indigo-500/30 px-3 py-1 text-indigo-400 rounded-full font-bold flex items-center gap-1.5 shadow-[0_0_10px_rgba(99,102,241,0.2)]">
+              <span className="w-2 h-2 rounded-full bg-indigo-400 animate-ping" />
+              Real-Time Verification Engine Active
+            </span>
+          </div>
+          <h1 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-white">
+            Multi-Type Threat & Fraud Sandbox
           </h1>
-          <p className="text-[var(--ink-dim)] text-[15px] leading-relaxed">
-            Select a scanner category below. ScamShield evaluates submitted details against rule sets, pattern indicators, and AI analysis.
+          <p className="text-[#94A3B8] text-[15px] leading-relaxed">
+            Submit job offers, suspicious messages, payment demands, recruiter details, or URLs for real-time tri-engine fraud analysis.
           </p>
         </div>
 
@@ -48,10 +50,12 @@ export default function Scanner() {
 
         {/* Explainable Results Section */}
         {scanResult && (
-          <RiskCard
-            scan={scanResult}
-            onReset={() => setScanResult(null)}
-          />
+          <div className="mt-10 animate-fade-in">
+            <RiskCard
+              scan={scanResult}
+              onReset={() => setScanResult(null)}
+            />
+          </div>
         )}
       </main>
 

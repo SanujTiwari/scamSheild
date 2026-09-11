@@ -1,6 +1,7 @@
-import { ShieldAlert, CheckCircle2, Info, Lightbulb, ArrowUpRight, Flag, Sparkles, AlertTriangle, Globe, Database, Cpu, ExternalLink } from "lucide-react";
+import { ShieldAlert, CheckCircle2, Info, Lightbulb, ArrowUpRight, Flag, Sparkles, AlertTriangle, Globe, Database, Cpu, ExternalLink, Copy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
 
 export default function RiskCard({ scan, onReset }) {
   const navigate = useNavigate();
@@ -14,15 +15,14 @@ export default function RiskCard({ scan, onReset }) {
   const confidence = scan.confidence;
   const sources = scan.sources || [];
   const scoreBreakdown = scan.scoreBreakdown;
-  const aiSummary = scan.aiSummary;
   const threatIntelligence = scan.threatIntelligence;
 
   const getLevelBadgeClass = (l, s) => {
     if (s >= 81 || l === "Critical Risk") return "bg-rose-500/10 text-rose-400 border-rose-500/40 font-bold shadow-[0_0_15px_rgba(244,63,94,0.2)]";
     if (s >= 61 || l === "High Risk") return "bg-rose-500/10 text-rose-400 border-rose-500/30 font-bold";
     if (s >= 41 || l === "Medium Risk") return "bg-amber-500/10 text-amber-400 border-amber-500/30 font-semibold";
-    if (s >= 21 || l === "Low Risk") return "bg-cyan-500/10 text-cyan-400 border-cyan-500/30 font-medium";
-    return "bg-[#00F5A0]/10 text-[#00F5A0] border-[#00F5A0]/30 font-semibold shadow-[0_0_15px_rgba(0,245,160,0.15)]";
+    if (s >= 21 || l === "Low Risk") return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30 font-medium";
+    return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30 font-semibold shadow-[0_0_15px_rgba(99,102,241,0.2)]";
   };
 
   const getSeverityBadgeClass = (severity) => {
@@ -60,7 +60,7 @@ export default function RiskCard({ scan, onReset }) {
                   r="50"
                   fill="none"
                   strokeWidth="7"
-                  stroke={score >= 81 ? "#F43F5E" : score >= 61 ? "#F43F5E" : score >= 41 ? "#F59E0B" : "#00F5A0"}
+                  stroke={score >= 81 ? "#F43F5E" : score >= 61 ? "#F43F5E" : score >= 41 ? "#F59E0B" : "#6366F1"}
                   strokeDasharray="314.15"
                   initial={{ strokeDashoffset: 314.15 }}
                   animate={{ strokeDashoffset: 314.15 - (score / 100) * 314.15 }}
@@ -95,20 +95,31 @@ export default function RiskCard({ scan, onReset }) {
           </div>
 
           {/* Quick Actions */}
-          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+          <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
+            <button
+              onClick={() => {
+                const reportText = `[ScamShield Threat Audit]\nVerdict: ${level} (Risk Score: ${score}/100)\nRisk Signals: ${factors.map(f => f.reason || f).join("; ")}\nRecommendations: ${recommendations.join("; ")}`;
+                navigator.clipboard.writeText(reportText);
+                toast.success("Audit Report copied to clipboard!");
+              }}
+              className="font-mono text-[11px] uppercase tracking-widest bg-[#05070B] border border-white/10 text-white px-3.5 py-2.5 rounded-xl hover:border-indigo-500/50 hover:text-indigo-400 transition-all cursor-pointer font-semibold flex items-center gap-1.5"
+            >
+              <Copy className="w-3.5 h-3.5" /> Copy Report
+            </button>
+
             {onReset && (
               <button
                 onClick={onReset}
-                className="font-mono text-[11px] uppercase tracking-widest bg-[#05070B] border border-white/10 text-white px-4 py-2.5 rounded-xl hover:border-white/20 transition-all cursor-pointer font-medium"
+                className="font-mono text-[11px] uppercase tracking-widest bg-[#05070B] border border-white/10 text-white px-3.5 py-2.5 rounded-xl hover:border-white/20 transition-all cursor-pointer font-medium"
               >
                 Analyze Another
               </button>
             )}
             <button
               onClick={() => navigate("/dashboard")}
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-[#00F5A0] to-[#00D9FF] text-[#05070B] px-5 py-2.5 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(0,245,160,0.3)] transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-4 py-2.5 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
             >
-              View Dashboard <ArrowUpRight className="w-3.5 h-3.5" />
+              Dashboard <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </div>
         </div>
@@ -133,10 +144,10 @@ export default function RiskCard({ scan, onReset }) {
       {explanation && (
         <div className="px-6 sm:px-8 py-5 border-b border-white/10 bg-[#080C13]/40 flex items-start gap-3.5">
           <div className="p-2 rounded-xl bg-[#05070B] border border-white/10 flex-shrink-0 mt-0.5">
-            <Sparkles className="w-4 h-4 text-[#00F5A0]" />
+            <Sparkles className="w-4 h-4 text-indigo-400" />
           </div>
           <div className="text-[13.5px] leading-relaxed text-white">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-[#00F5A0] block mb-1 font-bold">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 block mb-1 font-bold">
               ScamShield AI Explanation Summary
             </span>
             {explanation}
@@ -144,7 +155,7 @@ export default function RiskCard({ scan, onReset }) {
         </div>
       )}
 
-      {/* Score Breakdown (when multiple sources contributed) */}
+      {/* Score Breakdown */}
       {scoreBreakdown && (scoreBreakdown.aiScore !== null || scoreBreakdown.intelScore !== null) && (
         <div className="px-6 sm:px-8 py-4 border-b border-white/10 bg-[#080C13]/20">
           <span className="font-mono text-[10px] uppercase tracking-widest text-[#94A3B8] font-bold block mb-3">
@@ -152,7 +163,7 @@ export default function RiskCard({ scan, onReset }) {
           </span>
           <div className="flex items-center gap-3 flex-wrap">
             <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-[#05070B]">
-              <Cpu className="w-3.5 h-3.5 text-[#00F5A0]" />
+              <Cpu className="w-3.5 h-3.5 text-indigo-400" />
               <span className="font-mono text-[11px] text-white font-semibold">
                 Rules: {scoreBreakdown.ruleScore}/100
               </span>
@@ -162,7 +173,7 @@ export default function RiskCard({ scan, onReset }) {
             </div>
             {scoreBreakdown.aiScore !== null && (
               <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 bg-[#05070B]">
-                <Sparkles className="w-3.5 h-3.5 text-[#00D9FF]" />
+                <Sparkles className="w-3.5 h-3.5 text-violet-400" />
                 <span className="font-mono text-[11px] text-white font-semibold">
                   AI: {scoreBreakdown.aiScore}/100
                 </span>
@@ -186,7 +197,7 @@ export default function RiskCard({ scan, onReset }) {
         </div>
       )}
 
-      {/* Threat Intelligence Section (URL scans) */}
+      {/* Threat Intelligence Section */}
       {threatIntelligence && threatIntelligence.findings && threatIntelligence.findings.length > 0 && (
         <div className="px-6 sm:px-8 py-5 border-b border-white/10 bg-[#080C13]/30">
           <div className="flex items-center gap-2 mb-3">
@@ -258,7 +269,7 @@ export default function RiskCard({ scan, onReset }) {
             </div>
           ) : (
             <div className="p-8 rounded-xl border border-dashed border-white/10 text-center text-[#94A3B8] text-[13.5px] space-y-2">
-              <CheckCircle2 className="w-8 h-8 text-[#00F5A0] mx-auto" />
+              <CheckCircle2 className="w-8 h-8 text-indigo-400 mx-auto" />
               <p className="font-medium text-white">No High-Risk Red Flags Detected</p>
               <p className="text-xs text-[#94A3B8]">This opportunity passed all heuristic, AI, and threat intelligence checks.</p>
             </div>
@@ -269,7 +280,7 @@ export default function RiskCard({ scan, onReset }) {
         <div className="lg:col-span-5 p-6 sm:p-8 space-y-4 bg-[#080C13]/30">
           <div className="flex items-center justify-between">
             <h3 className="font-display font-semibold text-[16px] tracking-tight flex items-center gap-2 text-white">
-              <Lightbulb className="w-4 h-4 text-[#00D9FF]" />
+              <Lightbulb className="w-4 h-4 text-violet-400" />
               Actionable Recommendations
             </h3>
             <span className="font-mono text-[10px] text-[#94A3B8] uppercase tracking-wider font-semibold">
@@ -280,7 +291,7 @@ export default function RiskCard({ scan, onReset }) {
           <div className="space-y-2.5 pt-1">
             {recommendations.map((rec, i) => (
               <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl border border-white/10 bg-[#0B111A]">
-                <span className="font-mono text-[10px] font-bold text-[#00D9FF] bg-[#05070B] w-5 h-5 rounded-md flex items-center justify-center border border-white/10 flex-shrink-0 mt-0.5">
+                <span className="font-mono text-[10px] font-bold text-indigo-400 bg-[#05070B] w-5 h-5 rounded-md flex items-center justify-center border border-white/10 flex-shrink-0 mt-0.5">
                   {i + 1}
                 </span>
                 <p className="text-[13px] text-white leading-relaxed font-normal">{rec}</p>
