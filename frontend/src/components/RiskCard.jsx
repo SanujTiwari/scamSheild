@@ -18,19 +18,11 @@ export default function RiskCard({ scan, onReset }) {
   const threatIntelligence = scan.threatIntelligence;
 
   const getLevelBadgeClass = (l, s) => {
-<<<<<<< HEAD
-    if (s >= 81 || l === "Critical Risk") return "bg-rose-500/10 text-rose-400 border-rose-500/40 font-bold shadow-[0_0_15px_rgba(244,63,94,0.2)]";
-    if (s >= 61 || l === "High Risk") return "bg-rose-500/10 text-rose-400 border-rose-500/30 font-bold";
-    if (s >= 41 || l === "Medium Risk") return "bg-amber-500/10 text-amber-400 border-amber-500/30 font-semibold";
-    if (s >= 21 || l === "Low Risk") return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30 font-medium";
-    return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30 font-semibold shadow-[0_0_15px_rgba(99,102,241,0.2)]";
-=======
     if (s >= 81 || l === "Critical Risk") return "bg-[#F4E2D8] text-[#C86D51] border-[#C86D51] font-bold shadow-xs";
     if (s >= 61 || l === "High Risk") return "bg-[#F4E2D8] text-[#C86D51] border-[#C86D51]/50 font-bold";
     if (s >= 41 || l === "Medium Risk") return "bg-[#F5EFEC] text-[#D9822B] border-[#D9822B]/40 font-semibold";
     if (s >= 21 || l === "Low Risk") return "bg-[#E2E7E2] text-[#7B8C7B] border-[#7B8C7B]/40 font-medium";
     return "bg-[#E2E7E2] text-[#7B8C7B] border-[#7B8C7B] font-semibold shadow-xs";
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
   };
 
   const getSeverityBadgeClass = (severity) => {
@@ -68,11 +60,7 @@ export default function RiskCard({ scan, onReset }) {
                   r="50"
                   fill="none"
                   strokeWidth="7"
-<<<<<<< HEAD
-                  stroke={score >= 81 ? "#F43F5E" : score >= 61 ? "#F43F5E" : score >= 41 ? "#F59E0B" : "#6366F1"}
-=======
                   stroke={score >= 61 ? "#C86D51" : score >= 41 ? "#D9822B" : "#7B8C7B"}
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                   strokeDasharray="314.15"
                   initial={{ strokeDashoffset: 314.15 }}
                   animate={{ strokeDashoffset: 314.15 - (score / 100) * 314.15 }}
@@ -114,7 +102,7 @@ export default function RiskCard({ scan, onReset }) {
                 navigator.clipboard.writeText(reportText);
                 toast.success("Audit Report copied to clipboard!");
               }}
-              className="font-mono text-[11px] uppercase tracking-widest bg-[#05070B] border border-white/10 text-white px-3.5 py-2.5 rounded-xl hover:border-indigo-500/50 hover:text-indigo-400 transition-all cursor-pointer font-semibold flex items-center gap-1.5"
+              className="font-sans text-xs uppercase tracking-widest bg-[#FDFBF7] border border-[#E5DDD4] text-[#2B231F] px-3.5 py-2.5 rounded-xl hover:bg-[#E5DDD4]/30 transition-all cursor-pointer font-semibold flex items-center gap-1.5"
             >
               <Copy className="w-3.5 h-3.5" /> Copy Report
             </button>
@@ -122,22 +110,14 @@ export default function RiskCard({ scan, onReset }) {
             {onReset && (
               <button
                 onClick={onReset}
-<<<<<<< HEAD
-                className="font-mono text-[11px] uppercase tracking-widest bg-[#05070B] border border-white/10 text-white px-3.5 py-2.5 rounded-xl hover:border-white/20 transition-all cursor-pointer font-medium"
-=======
                 className="font-sans text-xs uppercase tracking-widest bg-[#FDFBF7] border border-[#E5DDD4] text-[#2B231F] px-4 py-2.5 rounded-xl hover:bg-[#E5DDD4]/30 transition-all cursor-pointer font-medium"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
               >
                 Analyze Another
               </button>
             )}
             <button
               onClick={() => navigate("/dashboard")}
-<<<<<<< HEAD
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-4 py-2.5 rounded-xl font-bold hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
-=======
               className="font-sans text-xs uppercase tracking-widest bg-[#C86D51] hover:bg-[#B3583C] text-white px-5 py-2.5 rounded-xl font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
             >
               Dashboard <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
@@ -162,21 +142,12 @@ export default function RiskCard({ scan, onReset }) {
 
       {/* AI Explanation Banner */}
       {explanation && (
-<<<<<<< HEAD
-        <div className="px-6 sm:px-8 py-5 border-b border-white/10 bg-[#080C13]/40 flex items-start gap-3.5">
-          <div className="p-2 rounded-xl bg-[#05070B] border border-white/10 flex-shrink-0 mt-0.5">
-            <Sparkles className="w-4 h-4 text-indigo-400" />
-          </div>
-          <div className="text-[13.5px] leading-relaxed text-white">
-            <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 block mb-1 font-bold">
-=======
         <div className="px-6 sm:px-8 py-5 border-b border-[#E5DDD4] bg-[#F4E2D8]/40 flex items-start gap-3.5">
           <div className="p-2 rounded-xl bg-[#FDFBF7] border border-[#E5DDD4] flex-shrink-0 mt-0.5">
             <Sparkles className="w-4 h-4 text-[#C86D51]" />
           </div>
           <div className="text-[13.5px] leading-relaxed text-[#2B231F]">
             <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] block mb-1 font-bold">
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
               ScamShield AI Explanation Summary
             </span>
             {explanation}

@@ -30,155 +30,6 @@ import Navbar from "../components/Navbar";
 import ScannerForm from "../components/ScannerForm";
 import RiskCard from "../components/RiskCard";
 
-<<<<<<< HEAD
-/* Sleek Authentic Live Security Telemetry Console Preview */
-function LiveSecurityConsoleVisual() {
-  const [activeTab, setActiveTab] = useState("telemetry");
-
-  const demoScans = [
-    {
-      title: "Remote Data Specialist — Wire Deposit Fee Required",
-      type: "Job Posting",
-      score: 92,
-      time: "Just now",
-      signals: ["Refundable equipment fee demanded via Zelle", "Domain registered 3 days ago", "Recruiter email domain mismatch"],
-      status: "Threat Blocked",
-    },
-    {
-      title: "Google Senior Tech Lead Opportunity",
-      type: "LinkedIn Offer",
-      score: 12,
-      time: "3 mins ago",
-      signals: ["Official google.com hiring portal", "Verified corporate email header", "Standard interview process"],
-      status: "Cleared Safe",
-    },
-    {
-      title: "URGENT: Unpaid Customs Fee $2.99",
-      type: "SMS Phishing",
-      score: 98,
-      time: "7 mins ago",
-      signals: ["Known spoofed postal tracking gateway", "High-urgency click deadline", "Blacklisted IP subnet"],
-      status: "Threat Blocked",
-    },
-  ];
-
-  return (
-    <div className="relative w-full max-w-lg mx-auto rounded-2xl bg-[#0B111A] border border-white/10 shadow-2xl overflow-hidden select-none">
-      {/* App Window Top Header */}
-      <div className="bg-[#080C13] border-b border-white/10 px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-            <span className="w-2.5 h-2.5 rounded-full bg-indigo-500/80" />
-          </div>
-          <span className="font-mono text-[10.5px] text-[#94A3B8] ml-2 flex items-center gap-1.5">
-            <Lock className="w-3 h-3 text-indigo-400" /> scamshield.ai/live-console
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-          <span className="font-mono text-[9.5px] text-indigo-400 uppercase tracking-wider font-bold">
-            Live Engine Active
-          </span>
-        </div>
-      </div>
-
-      {/* Tabs Bar */}
-      <div className="flex border-b border-white/10 bg-[#080C13]/60 px-3 pt-2 gap-2 font-mono text-[10px] uppercase tracking-wider">
-        <button
-          type="button"
-          onClick={() => setActiveTab("telemetry")}
-          className={`px-3 py-1.5 rounded-t-lg transition-all cursor-pointer font-semibold ${
-            activeTab === "telemetry"
-              ? "bg-[#0B111A] border-t border-x border-white/10 text-white"
-              : "text-[#94A3B8] hover:text-white"
-          }`}
-        >
-          Live Telemetry
-        </button>
-        <button
-          type="button"
-          onClick={() => setActiveTab("intel")}
-          className={`px-3 py-1.5 rounded-t-lg transition-all cursor-pointer font-semibold ${
-            activeTab === "intel"
-              ? "bg-[#0B111A] border-t border-x border-white/10 text-white"
-              : "text-[#94A3B8] hover:text-white"
-          }`}
-        >
-          Domain Intel
-        </button>
-      </div>
-
-      {/* Console Content */}
-      <div className="p-5 space-y-4">
-        {/* Featured Live Threat Alert */}
-        <div className="p-4 rounded-xl border border-rose-500/30 bg-rose-950/20 space-y-3 shadow-lg">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-rose-500/20 text-rose-300 font-bold border border-rose-500/30 flex items-center gap-1">
-                <ShieldAlert className="w-3 h-3 text-rose-400" /> Threat Intercepted
-              </span>
-              <span className="font-mono text-[10px] text-[#94A3B8]">{demoScans[0].time}</span>
-            </div>
-            <span className="font-mono text-[11px] font-extrabold text-rose-400 bg-rose-500/10 px-2.5 py-0.5 rounded-md border border-rose-500/20">
-              Risk: {demoScans[0].score}/100
-            </span>
-          </div>
-
-          <div>
-            <h4 className="font-display font-semibold text-[14px] text-white">
-              {demoScans[0].title}
-            </h4>
-            <p className="font-mono text-[10px] text-[#94A3B8] mt-0.5">
-              Category: {demoScans[0].type} • Status: {demoScans[0].status}
-            </p>
-          </div>
-
-          <div className="space-y-1.5 pt-2 border-t border-rose-500/20">
-            <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-bold block">
-              Flagged Risk Signals:
-            </span>
-            {demoScans[0].signals.map((sig, i) => (
-              <div key={i} className="flex items-center gap-2 font-mono text-[11px] text-rose-200">
-                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 flex-shrink-0" />
-                <span>{sig}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Live Stream List */}
-        <div className="space-y-2">
-          <span className="font-mono text-[9px] uppercase tracking-wider text-[#94A3B8] font-bold block">
-            Real-Time Analysis Feed:
-          </span>
-          {demoScans.slice(1).map((item, idx) => (
-            <div
-              key={idx}
-              className="p-3 rounded-xl border border-white/10 bg-[#080C13] flex items-center justify-between text-xs hover:border-white/20 transition-colors"
-            >
-              <div className="flex items-center gap-2.5">
-                <div className={`w-2 h-2 rounded-full ${item.score > 50 ? "bg-rose-400" : "bg-indigo-400"}`} />
-                <div>
-                  <p className="font-display font-medium text-white text-[12.5px] truncate max-w-[200px] sm:max-w-[240px]">
-                    {item.title}
-                  </p>
-                  <p className="font-mono text-[9.5px] text-[#94A3B8]">{item.type} • {item.time}</p>
-                </div>
-              </div>
-              <span className={`font-mono text-[9.5px] uppercase font-bold px-2 py-0.5 rounded-md ${
-                item.score > 50
-                  ? "bg-rose-500/10 text-rose-400 border border-rose-500/20"
-                  : "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
-              }`}>
-                {item.status}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
-=======
 /* Layered Sophisticated AI Scam Detection Core Visual (Organic Terracotta Palette) */
 function AIScamDetectionCoreVisual() {
   return (
@@ -278,7 +129,6 @@ function AIScamDetectionCoreVisual() {
           <span className="font-sans text-[11px] font-bold text-[#7B8C7B]">Verified Safe</span>
         </div>
       </motion.div>
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
     </div>
   );
 }
@@ -379,7 +229,7 @@ export default function Landing() {
             transition={{ duration: 0.45, delay: 0.15 }}
             className="lg:col-span-5"
           >
-            <LiveSecurityConsoleVisual />
+            <AIScamDetectionCoreVisual />
           </motion.div>
         </section>
 

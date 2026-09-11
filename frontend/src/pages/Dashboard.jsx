@@ -172,22 +172,14 @@ function Dashboard() {
   if (isLoading) return <LoadingSpinner message="Loading Fraud Intelligence Console..." />;
 
   return (
-<<<<<<< HEAD
-    <div className="min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-indigo-500 selection:text-white">
-=======
     <div className="min-h-screen bg-[#FDFBF7] text-[#2B231F] selection:bg-[#F4E2D8] selection:text-[#C86D51]">
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
       <Navbar />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#E5DDD4] pb-6">
           <div>
-<<<<<<< HEAD
-            <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 font-bold">
-=======
             <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] font-bold">
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
               AI Fraud Intelligence Unit
             </span>
             <h1 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-[#2B231F] mt-1">
@@ -207,11 +199,7 @@ function Dashboard() {
             </button>
             <button
               onClick={() => navigate("/scanner")}
-<<<<<<< HEAD
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-2.5 rounded-xl hover:shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all flex items-center gap-1.5 cursor-pointer font-bold shadow-xs"
-=======
               className="font-sans text-xs uppercase tracking-widest bg-[#C86D51] hover:bg-[#B3583C] text-white px-5 py-2.5 rounded-xl transition-all flex items-center gap-1.5 cursor-pointer font-bold shadow-xs"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
             >
               <Plus className="w-4 h-4" /> Execute Scan
             </button>
@@ -266,16 +254,6 @@ function Dashboard() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.15 }}
-<<<<<<< HEAD
-            className="p-5 rounded-2xl border border-indigo-500/30 bg-indigo-500/10 space-y-2 shadow-xl"
-          >
-            <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 font-extrabold">Verified / Safe</span>
-              <CheckCircle className="w-4 h-4 text-indigo-400" />
-            </div>
-            <p className="font-mono text-3xl font-extrabold text-indigo-400">{stats.safeLow}</p>
-            <p className="text-[12px] text-indigo-300 font-medium">Minimal threat profiles</p>
-=======
             className="p-5 rounded-2xl border border-[#7B8C7B]/30 bg-[#E2E7E2]/50 space-y-2 shadow-xs"
           >
             <div className="flex items-center justify-between">
@@ -284,7 +262,6 @@ function Dashboard() {
             </div>
             <p className="font-sans text-3xl font-extrabold text-[#7B8C7B]">{stats.safeLow}</p>
             <p className="text-[12px] text-[#5A6A5A] font-medium">Minimal threat profiles</p>
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
           </motion.div>
         </div>
 
@@ -308,11 +285,7 @@ function Dashboard() {
                     <Icon className="w-4 h-4 text-[#665A54]" />
                     <span className="font-display text-[13px] font-medium text-[#2B231F]">{item.label}</span>
                   </div>
-<<<<<<< HEAD
-                  <span className="font-mono text-[13px] font-bold text-indigo-400">{item.count}</span>
-=======
                   <span className="font-sans text-[13px] font-bold text-[#C86D51]">{item.count}</span>
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                 </div>
               );
             })}
@@ -328,11 +301,7 @@ function Dashboard() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search case files by keyword, title, sender, or entity..."
-<<<<<<< HEAD
-              className="w-full pl-10 pr-4 py-2 text-[13px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 text-white outline-none"
-=======
               className="w-full pl-10 pr-4 py-2 text-[13px] rounded-xl bg-[#F5EFEC] border border-[#E5DDD4] focus:border-[#C86D51] text-[#2B231F] outline-none placeholder-[#A3958B]"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
             />
           </div>
 
@@ -407,21 +376,12 @@ function Dashboard() {
 
                   <div className="flex items-center justify-between pt-3 border-t border-[#E5DDD4]">
                     <div className="flex items-center gap-2">
-<<<<<<< HEAD
-                      <span className="font-mono text-[11px] font-bold text-white">Score: {score}/100</span>
-                      <span className={`font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-md border ${
-                        score >= 81 ? "border-rose-500/40 bg-rose-500/10 text-rose-400 font-bold" :
-                        score >= 61 ? "border-rose-500/30 bg-rose-500/10 text-rose-400 font-bold" :
-                        score >= 41 ? "border-amber-500/30 bg-amber-500/10 text-amber-400 font-semibold" :
-                        "border-indigo-500/30 bg-indigo-500/10 text-indigo-400 font-semibold"
-=======
                       <span className="font-sans text-[11px] font-bold text-[#2B231F]">Score: {score}/100</span>
                       <span className={`font-sans text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-md border ${
                         score >= 81 ? "border-[#C86D51] bg-[#F4E2D8] text-[#C86D51] font-bold" :
                         score >= 61 ? "border-[#C86D51]/60 bg-[#F4E2D8] text-[#C86D51] font-bold" :
                         score >= 41 ? "border-[#D9822B]/60 bg-[#F5EFEC] text-[#D9822B] font-semibold" :
                         "border-[#7B8C7B]/60 bg-[#E2E7E2] text-[#7B8C7B] font-semibold"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                       }`}>
                         {level}
                       </span>
@@ -464,11 +424,7 @@ function Dashboard() {
             </p>
             <button
               onClick={() => navigate("/scanner")}
-<<<<<<< HEAD
-              className="font-mono text-[11px] uppercase tracking-widest bg-gradient-to-r from-indigo-600 to-violet-600 text-white px-5 py-2.5 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer mt-2 font-bold"
-=======
               className="font-sans text-xs uppercase tracking-widest bg-[#C86D51] hover:bg-[#B3583C] text-white px-5 py-2.5 rounded-xl transition-all inline-flex items-center gap-1.5 cursor-pointer mt-2 font-bold"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
             >
               Start New Scan
             </button>
@@ -499,7 +455,6 @@ function Dashboard() {
       <ChatBot />
     </div>
   );
-}
 }
 
 export default Dashboard;

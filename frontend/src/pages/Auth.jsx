@@ -124,15 +124,9 @@ export default function Auth() {
               
               {/* Header Badge & Title */}
               <div className="space-y-3">
-<<<<<<< HEAD
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-[#080C13]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-indigo-400 font-bold">
-=======
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#C86D51]/30 bg-[#F5EFEC]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#C86D51] animate-pulse" />
                   <span className="font-sans text-[10px] uppercase tracking-widest text-[#C86D51] font-bold">
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                     AUTHENTICATION PORTAL // CLEARANCE
                   </span>
                 </div>
@@ -148,11 +142,7 @@ export default function Auth() {
                       <button
                         type="button"
                         onClick={() => setIsLoginState(false)}
-<<<<<<< HEAD
-                        className="font-mono text-[12px] uppercase font-bold text-indigo-400 hover:text-indigo-300 hover:underline cursor-pointer transition-colors"
-=======
                         className="font-sans text-[12px] uppercase font-bold text-[#C86D51] hover:text-[#B3583C] hover:underline cursor-pointer transition-colors"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                       >
                         Sign up free &rarr;
                       </button>
@@ -163,11 +153,7 @@ export default function Auth() {
                       <button
                         type="button"
                         onClick={() => setIsLoginState(true)}
-<<<<<<< HEAD
-                        className="font-mono text-[12px] uppercase font-bold text-indigo-400 hover:text-indigo-300 hover:underline cursor-pointer transition-colors"
-=======
                         className="font-sans text-[12px] uppercase font-bold text-[#C86D51] hover:text-[#B3583C] hover:underline cursor-pointer transition-colors"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                       >
                         Sign in &rarr;
                       </button>
@@ -188,11 +174,7 @@ export default function Auth() {
                       transition={{ duration: 0.2 }}
                       className="space-y-1.5"
                     >
-<<<<<<< HEAD
-                      <label className="font-mono text-[10.5px] uppercase tracking-wider text-indigo-400 font-bold">
-=======
                       <label className="font-sans text-[10.5px] uppercase tracking-wider text-[#C86D51] font-bold">
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                         Full Name *
                       </label>
                       <div className="relative">
@@ -203,11 +185,7 @@ export default function Auth() {
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           placeholder="e.g. Alex Morgan"
-<<<<<<< HEAD
-                          className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all placeholder-[#94A3B8]/40"
-=======
                           className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#F5EFEC] border border-[#E5DDD4] focus:border-[#C86D51] focus:ring-1 focus:ring-[#C86D51] text-[#2B231F] outline-none transition-all placeholder-[#A3958B]"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                         />
                       </div>
                     </motion.div>
@@ -215,11 +193,7 @@ export default function Auth() {
                 </AnimatePresence>
 
                 <div className="space-y-1.5">
-<<<<<<< HEAD
-                  <label className="font-mono text-[10.5px] uppercase tracking-wider text-indigo-400 font-bold">
-=======
                   <label className="font-sans text-[10.5px] uppercase tracking-wider text-[#C86D51] font-bold">
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                     Email Address *
                   </label>
                   <div className="relative">
@@ -230,22 +204,14 @@ export default function Auth() {
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="you@domain.com"
-<<<<<<< HEAD
-                      className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#080C13] border border-white/10 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 text-white outline-none transition-all placeholder-[#94A3B8]/40"
-=======
                       className="w-full pl-10 pr-4 py-3 text-[14px] rounded-xl bg-[#F5EFEC] border border-[#E5DDD4] focus:border-[#C86D51] focus:ring-1 focus:ring-[#C86D51] text-[#2B231F] outline-none transition-all placeholder-[#A3958B]"
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between">
-<<<<<<< HEAD
-                    <label className="font-mono text-[10.5px] uppercase tracking-wider text-indigo-400 font-bold">
-=======
                     <label className="font-sans text-[10.5px] uppercase tracking-wider text-[#C86D51] font-bold">
->>>>>>> 57c2efb54ec5d38d75b24d46e7777c2a7ce487d1
                       Password *
                     </label>
                     {isLoginState && (
